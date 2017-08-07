@@ -1,6 +1,7 @@
 #include <xc.h>
 #include "amt.h"
 #include <stdio.h>
+#include "EEPROM.h"
 
 #pragma config XINST = OFF
 #pragma config FOSC = HS
@@ -32,6 +33,12 @@ void main(void) {
     LCD8init();
     delay_ms(1000);
     
+    unsigned char *data;
+    unsigned char address = 0;
+    ee_read_byte(address, &data);
+    LCD8send(*data, 1);
+    
+    while (1) {}
     //LCD8send(0x01, 0);
     //LCD8send(0x80, 0);
     //LCD8send('o', 1);

@@ -8098,23 +8098,3 @@ extern __nonreentrant void _delaywdt(unsigned long);
 #pragma intrinsic(_delay3)
 extern __nonreentrant void _delay3(unsigned char);
 
-# 4 "delay.c"
-void delay_ms(int x);
-void delay_us(int x);
-
-void delay_ms(int x)
-{
-for (int i = 0; i < x; i++)
-{
-_delay((unsigned long)((1)*(25000000/4000.0)));
-}
-}
-
-void delay_us(int x)
-{
-for (int i = 0; i < x; i++)
-{
-_delay((unsigned long)((1)*(25000000/4000000.0)));
-}
-}
-

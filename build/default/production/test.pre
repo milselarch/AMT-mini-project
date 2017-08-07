@@ -8185,8 +8185,178 @@ extern int vsscanf(const char *, const char *, va_list) __attribute__((unsupport
 extern int sprintf(char *, const char *, ...);
 extern int printf(const char *, ...);
 
+# 7 "C:\Program Files (x86)\Microchip\xc8\v1.37\include\stdlib.h"
+typedef unsigned short wchar_t;
 
-# 5 "test.c"
+# 15
+typedef struct {
+int rem;
+int quot;
+} div_t;
+typedef struct {
+unsigned rem;
+unsigned quot;
+} udiv_t;
+typedef struct {
+long quot;
+long rem;
+} ldiv_t;
+typedef struct {
+unsigned long quot;
+unsigned long rem;
+} uldiv_t;
+
+# 53
+extern double atof(const char *);
+extern double strtod(const char *, const char **);
+extern int atoi(const char *);
+extern unsigned xtoi(const char *);
+extern long atol(const char *);
+extern long strtol(const char *, char **, int);
+
+extern int rand(void);
+extern void srand(unsigned int);
+extern void * calloc(size_t, size_t);
+extern div_t div(int numer, int denom);
+extern udiv_t udiv(unsigned numer, unsigned denom);
+extern ldiv_t ldiv(long numer, long denom);
+extern uldiv_t uldiv(unsigned long numer,unsigned long denom);
+extern unsigned long _lrotl(unsigned long value, unsigned int shift);
+extern unsigned long _lrotr(unsigned long value, unsigned int shift);
+extern unsigned int _rotl(unsigned int value, unsigned int shift);
+extern unsigned int _rotr(unsigned int value, unsigned int shift);
+
+
+
+
+extern void * malloc(size_t);
+extern void free(void *);
+extern void * realloc(void *, size_t);
+
+# 86
+extern int atexit(void (*)(void));
+extern char * getenv(const char *);
+extern char ** environ;
+extern int system(char *);
+extern void qsort(void *, size_t, size_t, int (*)(const void *, const void *));
+extern void * bsearch(const void *, void *, size_t, size_t, int(*)(const void *, const void *));
+extern int abs(int);
+extern long labs(long);
+
+extern char * itoa(char * buf, int val, int base);
+extern char * utoa(char * buf, unsigned val, int base);
+
+
+
+
+extern char * ltoa(char * buf, long val, int base);
+extern char * ultoa(char * buf, unsigned long val, int base);
+
+extern char * ftoa(float f, int * status);
+
+# 76 "delay.h"
+void delay_ms(int x);
+void delay_us(int x);
+
+void delay_ms(int x)
+{
+for (int i = 0; i < x; i++)
+{
+_delay((unsigned long)((1)*(25000000/4000.0)));
+}
+}
+
+void delay_us(int x)
+{
+for (int i = 0; i < x; i++)
+{
+_delay((unsigned long)((1)*(25000000/4000000.0)));
+}
+}
+
+# 12 "EEPROM.h"
+char cmpEEPROM(unsigned char input[], unsigned char check[]) {
+for (unsigned int i = 0;; i++) {
+unsigned char inputChar = input[i];
+unsigned char checkChar = check[i];
+if (inputChar == 0xff) {inputChar = 0; }
+if (checkChar == 0xff) {checkChar = 0; }
+
+if (inputChar == '\0' && checkChar == '\0') { break; }
+else if (inputChar == '\0' && checkChar != '\0') { return 1; }
+else if (inputChar != '\0' && checkChar == '\0') { return -1; }
+else if (inputChar > checkChar) { return 1; }
+else if (inputChar < checkChar) { return -1; }
+else {}
+}
+return 0;
+}
+
+char cmpEEPROML(unsigned char input[], unsigned char check[], const unsigned int length) {
+for (unsigned int i = 0; i<length ; i++) {
+unsigned char inputChar = input[i];
+unsigned char checkChar = check[i];
+if (inputChar == 0xff) {inputChar = 0; }
+if (checkChar == 0xff) {checkChar = 0; }
+
+if (inputChar == '\0' && checkChar == '\0') { break; }
+else if (inputChar == '\0' && checkChar != '\0') { return 1; }
+else if (inputChar != '\0' && checkChar == '\0') { return -1; }
+else if (inputChar > checkChar) { return 1; }
+else if (inputChar < checkChar) { return -1; }
+else {}
+}
+return 0;
+}
+
+void ee_write(unsigned int address, unsigned char _data[]) {
+for (volatile int index = 0; _data[index] != '\0'; index++) {
+;
+}
+}
+
+void ee_write_byte(unsigned char address, unsigned char *_data) {
+
+int ctr = 0;
+
+while (_data[ctr]!=0) {
+;
+ctr++;
+}
+}
+
+void ee_write_char(unsigned char address, const unsigned char chunk){
+
+# 85
+;
+}
+
+void writeEEPROM(unsigned char _data[]) {
+for (unsigned volatile char i=0; i<8; i++) {
+ee_write_byte(i, _data+i);
+__nop();__nop();__nop();__nop();__nop();
+
+
+delay_ms(20);
+if (_data[i] == '\0') {break;};
+}
+}
+
+void ee_read_byte(unsigned char address, unsigned char *_data){
+
+# 108
+*_data = 0;
+}
+
+void readEEPROM(unsigned char _data[]) {
+for (int i=0;; i++) {
+ee_read_byte(i, _data+i);
+if (_data[i] == '\0' || _data[i] == 0xff) {break;}
+}
+}
+
+
+# 6 "test.c"
 #pragma config XINST = OFF
 #pragma config FOSC = HS
 #pragma config WDT = OFF
@@ -8217,6 +8387,12 @@ void main(void) {
 LCD8init();
 delay_ms(1000);
 
+unsigned char *data;
+unsigned char address = 0;
+ee_read_byte(address, &data);
+LCD8send(*data, 1);
+
+while (1) {}
 
 
 
