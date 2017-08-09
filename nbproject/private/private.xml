@@ -4,11 +4,14 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/user/MPLABXProjects/mini-project.X/SPI.c</file>
+            <file>file:/C:/Users/user/MPLABXProjects/mini-project.X/exprom.h</file>
             <file>file:/C:/Users/user/MPLABXProjects/mini-project.X/uart.c</file>
             <file>file:/C:/Users/user/MPLABXProjects/mini-project.X/test.c</file>
+            <file>file:/C:/Users/user/MPLABXProjects/mini-project.X/amt.h</file>
             <file>file:/C:/Users/user/MPLABXProjects/mini-project.X/LCD8.c</file>
             <file>file:/C:/Users/user/MPLABXProjects/mini-project.X/TIMER.c</file>
             <file>file:/C:/Users/user/MPLABXProjects/mini-project.X/EEPROM.h</file>
+            <file>file:/C:/Users/user/MPLABXProjects/mini-project.X/Keypad.c</file>
             <file>file:/C:/Users/user/MPLABXProjects/mini-project.X/SPI_LCD4.c</file>
             <file>file:/C:/Users/user/MPLABXProjects/mini-project.X/delay.c</file>
         </group>

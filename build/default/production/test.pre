@@ -8274,7 +8274,128 @@ _delay((unsigned long)((1)*(25000000/4000000.0)));
 }
 }
 
+# 36 "exprom.h"
+const unsigned long EEDELAY = 30;
+
+void wait() {
+
+
+while((SSP1STATbits).BF == 0);
+}
+
+void XEEInit(void) {
+(PORTDbits.RD7) = 1;
+(TRISDbits.TRISD7) = 0;
+
+(TRISCbits.TRISC3) = 0;
+(TRISCbits.TRISC4) = 1;
+(TRISCbits.TRISC5) = 0;
+
+BAUDCON1 = 0x00;
+
+# 60
+SPI1init();
+SPI1out(0x00);
+}
+
+
+unsigned char XEERead(
+unsigned char address
+) {
+(PORTDbits.RD7) = 0;
+
+SPI1out(0x03);
+SPI1out(((address)>>8)&0xFF);
+SPI1out(address&0xFF);
+
+(SSP1BUF) = 0x00;
+wait();
+
+unsigned char buffer = (SSP1BUF);
+
+(PORTDbits.RD7) = 1;
+return buffer;
+}
+
+static void eeWriteChar(unsigned char EEPROMAddress, unsigned char value) {
+unsigned long SPICON1Save;
+
+
+SPICON1Save = (SSP1CON1);
+(SSP1CON1) = (SSP1CON1);
+
+unsigned char sr = 0x00;
+
+while(1) {
+(PORTDbits.RD7) = 0;
+SPI1out(0x06);
+SPI1out(0x05);
+(PORTDbits.RD7) = 1;
+(SSP1BUF) = 0x00;
+wait();
+
+sr = (SSP1BUF);
+if (sr & 0x02 == 0x02) { break; }
+}
+
+wait();
+SPI1out(0x02);
+SPI1out(((EEPROMAddress)>>8)&0xFF);
+SPI1out(EEPROMAddress&0xFF);
+
+(SSP1BUF) = value;
+
+wait();
+
+int Dummy = (SSP1BUF);
+
+(PIR1bits.SSPIF) = 0;
+
+(PORTDbits.RD7) = 1;
+
+(SSP1CON1) = SPICON1Save;
+
+
+while(XEEIsBusy());
+
+}
+
+int XEEIsBusy() {
+unsigned char result;
+unsigned long SPICON1Save;
+
+
+SPICON1Save = (SSP1CON1);
+(SSP1CON1) = (SSP1CON1);
+
+(PORTDbits.RD7) = 0;
+
+(SSP1BUF) = 0x05;
+wait();
+
+unsigned long val;
+val = (SSP1BUF);
+(PIR1bits.SSPIF) = 0;
+
+
+(SSP1BUF) = 0;
+wait();
+
+val = (SSP1BUF);
+(PIR1bits.SSPIF) = 0;
+(PORTDbits.RD7) = 1;
+
+
+(SSP1CON1) = SPICON1Save;
+
+return val & 1;
+}
+
 # 12 "EEPROM.h"
+void testConfig() {
+SSPBUF = 2;
+}
+
 char cmpEEPROM(unsigned char input[], unsigned char check[]) {
 for (unsigned int i = 0;; i++) {
 unsigned char inputChar = input[i];
@@ -8315,20 +8436,12 @@ for (volatile int index = 0; _data[index] != '\0'; index++) {
 }
 }
 
-void ee_write_byte(unsigned char address, unsigned char *_data) {
+# 68
+void ee_write_char(unsigned char address, const unsigned char chunk) {
 
-int ctr = 0;
+# 93
+eeWriteChar(address, chunk);
 
-while (_data[ctr]!=0) {
-;
-ctr++;
-}
-}
-
-void ee_write_char(unsigned char address, const unsigned char chunk){
-
-# 85
-;
 }
 
 void writeEEPROM(unsigned char _data[]) {
@@ -8344,8 +8457,10 @@ if (_data[i] == '\0') {break;};
 
 void ee_read_byte(unsigned char address, unsigned char *_data){
 
-# 108
-*_data = 0;
+# 117
+*_data = XEERead(address);
+
+
 }
 
 void readEEPROM(unsigned char _data[]) {
@@ -8360,9 +8475,14 @@ if (_data[i] == '\0' || _data[i] == 0xff) {break;}
 #pragma config XINST = OFF
 #pragma config FOSC = HS
 #pragma config WDT = OFF
-int counter=0;
+
+const int READ_MODE = 1;
+const int WRITE_MODE = 0;
+int counter = 0;
 int sec=0;
 
+extern unsigned char scan_code[16];
+unsigned char keyValues[16] = "0123456789ABCD*#";
 
 void interrupt HighIsr(void)
 {
@@ -8383,16 +8503,97 @@ void interrupt low_priority LowIsr(void)
 
 }
 
+void lcdWriteLine(char * data) {
+for (int i = 0; data[i] != 0; i++) {
+LCD8send(data[i], 1);
+}
+}
+
+void writeNum(unsigned char number) {
+char numStr[10];
+sprintf(numStr, "%i", number);
+lcdWriteLine(numStr);
+}
+
+void writeLCD(unsigned char address) {
+unsigned char *data;
+LCD8send(0x01, 0);
+ee_read_byte(address, data);
+
+lcdWriteLine("#");
+writeNum(address);
+
+lcdWriteLine(" V");
+writeNum(*data);
+}
+
 void main(void) {
 LCD8init();
+KeyPadinit();
+XEEInit();
+
 delay_ms(1000);
 
-unsigned char *data;
-unsigned char address = 0;
-ee_read_byte(address, &data);
-LCD8send(*data, 1);
+TRISJ = 0x00;
+PORTJ = 0b0;
 
-while (1) {}
+unsigned char address = 0;
+unsigned char writeValue = 0;
+unsigned int mode = READ_MODE;
+unsigned char prevKey = 0xFF;
+
+while (1) {
+int keyNo = Read_KeyPad();
+unsigned char key = keyValues[keyNo];
+
+if (key != prevKey) {
+PORTJ++;
+
+if (keyNo >= 0 && 10 > keyNo) {
+if (mode == READ_MODE) {
+address = address * 10 + keyNo;
+} else {
+writeValue = writeValue * 10 + keyNo;
+}
+
+} else if (key == 'A') {
+if (mode == READ_MODE) { address = 0; }
+if (mode == WRITE_MODE) { writeValue = 0; }
+
+} else if (key == 'B') {
+if (mode == READ_MODE) { address++; }
+if (mode == WRITE_MODE) { writeValue++; }
+
+} else if (key == 'C') {
+if (mode == READ_MODE) { address--; }
+if (mode == WRITE_MODE) { writeValue--; }
+
+} else if (key == 'D') {
+if (mode == READ_MODE) { mode = WRITE_MODE; }
+else if (mode == WRITE_MODE) { mode = READ_MODE; }
+
+} else if (key == '*' && mode == WRITE_MODE) {
+eeWriteChar(address, writeValue);
+}
+
+if (keyNo != 0xFF) {
+writeLCD(address);
+}
+
+LCD8send(0xC0, 0);
+LCD8send("WR"[mode], 1);
+lcdWriteLine(" key=");
+
+LCD8send(key, 1);
+lcdWriteLine(" val=");
+writeNum(writeValue);
+
+prevKey = key;
+}
+
+delay_ms(100);
+}
+
 
 
 

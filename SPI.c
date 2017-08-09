@@ -7,7 +7,7 @@ void SPI1init(void)
 {
 	SSP1CON1 = 0b00100010;	// Enable SPI, CKP=0, Master, Fosc/64
 	SSP1STATbits.CKE = 1;	// CKE=1, (rising edge for shift register)
-	TRISCbits.TRISC3 = 0;	// RC3 is SCk
+	TRISCbits.TRISC3 = 0;	// RC3 is SCK
 	TRISCbits.TRISC5 = 0;	// RC5 is SDO
 	SPI1out(0x00);
 }

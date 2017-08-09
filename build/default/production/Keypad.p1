@@ -6302,91 +6302,89 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;Keypad.c: 8: 0xDE,0xEE,0xE7,0xED};
 "10
 [v _KeyPadinit `(v ~T0 @X0 1 ef ]
-"11
 {
-[; ;Keypad.c: 10: void KeyPadinit()
-[; ;Keypad.c: 11: {
+[; ;Keypad.c: 10: void KeyPadinit() {
 [e :U _KeyPadinit ]
 [f ]
-[; ;Keypad.c: 12: TRISD = 0xF0;
-"12
+[; ;Keypad.c: 11: TRISD = 0xF0;
+"11
 [e = _TRISD -> -> 240 `i `uc ]
-[; ;Keypad.c: 13: }
-"13
+[; ;Keypad.c: 12: }
+"12
 [e :UE 772 ]
 }
-"15
+"14
 [v _Read_KeyPad `(uc ~T0 @X0 1 ef ]
-"16
+"15
 {
-[; ;Keypad.c: 15: unsigned char Read_KeyPad()
-[; ;Keypad.c: 16: {
+[; ;Keypad.c: 14: unsigned char Read_KeyPad()
+[; ;Keypad.c: 15: {
 [e :U _Read_KeyPad ]
 [f ]
-"17
+"16
 [v _code `uc ~T0 @X0 1 a ]
 [v _Col `uc ~T0 @X0 1 a ]
 [v _value `uc ~T0 @X0 1 a ]
-"18
+"17
 [v _i `i ~T0 @X0 1 a ]
-[; ;Keypad.c: 17: unsigned char code,Col,value;
-[; ;Keypad.c: 18: int i;
-[; ;Keypad.c: 19: value = 0xFF;
-"19
+[; ;Keypad.c: 16: unsigned char code,Col,value;
+[; ;Keypad.c: 17: int i;
+[; ;Keypad.c: 18: value = 0xFF;
+"18
 [e = _value -> -> 255 `i `uc ]
-[; ;Keypad.c: 20: Col = 0b11111110;
-"20
+[; ;Keypad.c: 19: Col = 0b11111110;
+"19
 [e = _Col -> -> 254 `i `uc ]
-[; ;Keypad.c: 21: for (i=0;i<4;i++)
-"21
+[; ;Keypad.c: 20: for (i=0;i<4;i++)
+"20
 {
 [e = _i -> 0 `i ]
 [e $ < _i -> 4 `i 774  ]
 [e $U 775  ]
-"22
+"21
 [e :U 774 ]
-[; ;Keypad.c: 22: {
+[; ;Keypad.c: 21: {
 {
-[; ;Keypad.c: 23: LATD = Col;
-"23
+[; ;Keypad.c: 22: LATD = Col;
+"22
 [e = _LATD _Col ]
-[; ;Keypad.c: 24: code = PORTD;
-"24
+[; ;Keypad.c: 23: code = PORTD;
+"23
 [e = _code _PORTD ]
-[; ;Keypad.c: 25: code = code | 0b00001111;
-"25
+[; ;Keypad.c: 24: code = code | 0b00001111;
+"24
 [e = _code -> | -> _code `i -> 15 `i `uc ]
-[; ;Keypad.c: 26: code = code & Col;
-"26
+[; ;Keypad.c: 25: code = code & Col;
+"25
 [e = _code -> & -> _code `i -> _Col `i `uc ]
-[; ;Keypad.c: 27: if (code!=Col)
-"27
+[; ;Keypad.c: 26: if (code!=Col)
+"26
 [e $ ! != -> _code `i -> _Col `i 777  ]
-[; ;Keypad.c: 28: {
-"28
+[; ;Keypad.c: 27: {
+"27
 {
-[; ;Keypad.c: 29: value = process_key(code);
-"29
+[; ;Keypad.c: 28: value = process_key(code);
+"28
 [e = _value ( _process_key (1 _code ]
-[; ;Keypad.c: 30: break;
-"30
+[; ;Keypad.c: 29: break;
+"29
 [e $U 775  ]
-"31
+"30
 }
 [e :U 777 ]
-[; ;Keypad.c: 31: }
-[; ;Keypad.c: 32: Col = (Col << 1) | 0x01;
-"32
+[; ;Keypad.c: 30: }
+[; ;Keypad.c: 31: Col = (Col << 1) | 0x01;
+"31
 [e = _Col -> | << -> _Col `i -> 1 `i -> 1 `i `uc ]
-"33
+"32
 }
-"21
+"20
 [e ++ _i -> 1 `i ]
 [e $ < _i -> 4 `i 774  ]
 [e :U 775 ]
-"33
+"32
 }
-[; ;Keypad.c: 33: }
+[; ;Keypad.c: 32: }
 [; ;Keypad.c: 34: return(value);
 "34
 [e ) _value ]

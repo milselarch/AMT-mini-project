@@ -5,9 +5,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "delay.h"
+#include "exprom.h"
 
-//http://innovatelogics.com/internal-eeprom-of-pic18f4550/
 
+//needs RC6 on chips select
+void testConfig() {
+    SSPBUF = 2;
+}
 
 char cmpEEPROM(unsigned char input[], unsigned char check[]) {
     for (unsigned int i = 0;; i++) {
@@ -49,6 +53,7 @@ void ee_write(unsigned int address, unsigned char _data[]) {
     }
 }
 
+/*
 void ee_write_byte(unsigned char address, unsigned char *_data) {
     //sendPacket("ADDR",&address,4,1);
     int ctr = 0; 
@@ -58,8 +63,10 @@ void ee_write_byte(unsigned char address, unsigned char *_data) {
         ctr++; 
     }
 }
+*/
 
-void ee_write_char(unsigned char address, const unsigned char chunk){
+void ee_write_char(unsigned char address, const unsigned char chunk) {
+    //ADDR = 2;
     /*
     EEDATA = chunk;
     EEADR = address;
@@ -82,7 +89,9 @@ void ee_write_char(unsigned char address, const unsigned char chunk){
     INTCONbits.GIE = 1;  // enable interrupts
     */
     
-    eeprom_write(address, chunk); 
+    //eeprom_write(address, chunk); 
+    eeWriteChar(address, chunk);
+    
 }
 
 void writeEEPROM(unsigned char _data[]) {
@@ -104,8 +113,10 @@ void ee_read_byte(unsigned char address, unsigned char *_data){
     EECON1bits.RD = 1;
     *_data = EEDATA;
     */
-    
-    *_data = eeprom_read(address);
+   
+    *_data = XEERead(address);
+            
+    //*_data = eeprom_read(address);
 }
 
 void readEEPROM(unsigned char _data[]) {

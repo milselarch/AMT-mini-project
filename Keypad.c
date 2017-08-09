@@ -7,9 +7,8 @@ unsigned char scan_code[16]={0xEB,0x77,0x7B,0x7D,
 							 0xDB,0xDD,0x7E,0xBE,
 							 0xDE,0xEE,0xE7,0xED};
 
-void KeyPadinit()
-{
-		TRISD = 0xF0;
+void KeyPadinit() {
+    TRISD = 0xF0;
 }
 
 unsigned char Read_KeyPad()
@@ -31,6 +30,7 @@ unsigned char Read_KeyPad()
 		}
 		Col = (Col << 1) | 0x01;
 	}
+    
 	return(value);
 }
 

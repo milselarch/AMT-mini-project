@@ -7,6 +7,7 @@ void delay_ms(int x);
 void delay_us(int x);
 void LCD8init(void);
 void LCD8send(char c, char mode);
+void lcdWriteLine(char data[]);
 
 void LCD8init(void)
 {
@@ -38,8 +39,7 @@ void LCD8init(void)
 	LCD8send('#',1);
 }
 
-void LCD8send(char c, char mode)
-{
+void LCD8send(char c, char mode) {
 	LCDRS = mode;
 	delay_ms(1);
 
@@ -48,6 +48,6 @@ void LCD8send(char c, char mode)
 	delay_us(1);
 	LCDEN = 0;
 	delay_us(50);  // 50 us in between commands or data
-}
+};
 
 
