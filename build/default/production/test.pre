@@ -8274,16 +8274,14 @@ _delay((unsigned long)((1)*(25000000/4000000.0)));
 }
 }
 
-# 36 "exprom.h"
+# 28 "exprom.h"
 const unsigned long EEDELAY = 30;
 
-void wait() {
-
-
-while((SSP1STATbits).BF == 0);
+void eeWait() {
+while ((SSP1STATbits).BF == 0);
 }
 
-void XEEInit(void) {
+void eepromInit(void) {
 (PORTCbits.RC6) = 1;
 (TRISCbits.TRISC6) = 0;
 
@@ -8293,13 +8291,11 @@ void XEEInit(void) {
 
 BAUDCON1 = 0x00;
 
-# 60
 SPI1init();
 SPI1out(0x00);
 }
 
-
-unsigned char XEERead(
+unsigned char eepromRead(
 unsigned char address
 ) {
 (PORTCbits.RC6) = 0;
@@ -8309,7 +8305,7 @@ SPI1out(((address)>>8)&0xFF);
 SPI1out(address&0xFF);
 
 (SSP1BUF) = 0x00;
-wait();
+eeWait();
 
 unsigned char buffer = (SSP1BUF);
 
@@ -8317,24 +8313,25 @@ unsigned char buffer = (SSP1BUF);
 return buffer;
 }
 
-static void eeWriteChar(unsigned char address, unsigned char value) {
+static void eepromWrite(unsigned char address, unsigned char value) {
 
-# 89
+
+
+
 unsigned char sr = 0x00;
 
 while (1) {
 
-# 101
+# 83
 (PORTCbits.RC6) = 0;
 SPI1out(0x06);
-delay_ms(30);
 SPI1out(0x05);
 
 
 (PORTCbits.RC6) = 1;
 (SSP1BUF) = 0x00;
 
-wait();
+eeWait();
 
 
 sr = (SSP1BUF);
@@ -8350,15 +8347,10 @@ SPI1out(((address)>>8)&0xFF);
 SPI1out(address&0xFF);
 SPI1out(value);
 
-delay_ms(100);
 (PORTCbits.RC6) = 1;
 }
 
-# 12 "EEPROM.h"
-void testConfig() {
-SSPBUF = 2;
-}
-
+# 14 "EEPROM.h"
 char cmpEEPROM(unsigned char input[], unsigned char check[]) {
 for (unsigned int i = 0;; i++) {
 unsigned char inputChar = input[i];
@@ -8399,18 +8391,13 @@ for (volatile int index = 0; _data[index] != '\0'; index++) {
 }
 }
 
-# 68
 void ee_write_char(unsigned char address, const unsigned char chunk) {
-
-# 93
-eeWriteChar(address, chunk);
-
+eepromWrite(address, chunk);
 }
 
 void writeEEPROM(unsigned char _data[]) {
 for (unsigned volatile char i=0; i<8; i++) {
-ee_write_byte(i, _data+i);
-__nop();__nop();__nop();__nop();__nop();
+ee_write_char(i, _data+i);
 
 
 delay_ms(20);
@@ -8418,17 +8405,13 @@ if (_data[i] == '\0') {break;};
 }
 }
 
-void ee_read_byte(unsigned char address, unsigned char *_data){
-
-# 117
-*_data = XEERead(address);
-
-
+void ee_read_char(unsigned char address, unsigned char *_data){
+*_data = eepromRead(address);
 }
 
 void readEEPROM(unsigned char _data[]) {
 for (int i=0;; i++) {
-ee_read_byte(i, _data+i);
+ee_read_char(i, _data+i);
 if (_data[i] == '\0' || _data[i] == 0xff) {break;}
 }
 }
@@ -8481,7 +8464,7 @@ lcdWriteLine(numStr);
 void writeLCD(unsigned char address) {
 unsigned char *data;
 LCD8send(0x01, 0);
-ee_read_byte(address, data);
+ee_read_char(address, data);
 
 lcdWriteLine("#");
 writeNum(address);
@@ -8493,7 +8476,7 @@ writeNum(*data);
 void main(void) {
 LCD8init();
 KeyPadinit();
-XEEInit();
+eepromInit();
 
 delay_ms(1000);
 
@@ -8536,7 +8519,7 @@ if (mode == READ_MODE) { mode = WRITE_MODE; }
 else if (mode == WRITE_MODE) { mode = READ_MODE; }
 
 } else if (key == '*' && mode == WRITE_MODE) {
-eeWriteChar(address, writeValue);
+ee_write_char(address, writeValue);
 }
 
 if (keyNo != 0xFF) {

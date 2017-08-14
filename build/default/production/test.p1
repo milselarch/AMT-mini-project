@@ -128,14 +128,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _SPI1out `(v ~T0 @X0 0 ef1`uc ]
 "13754 C:\Program Files (x86)\Microchip\xc8\v1.37\include\pic18f97j60.h
 [v _SSP1BUF `Vuc ~T0 @X0 0 e@4041 ]
-"13759
-[v _SSPBUF `Vuc ~T0 @X0 0 e@4041 ]
-"99 EEPROM.h
-[v _ee_write_byte `(i ~T0 @X0 0 ef ]
-"43 C:\Program Files (x86)\Microchip\xc8\v1.37\include\pic18.h
-[v ___nop `(v ~T0 @X0 0 ef ]
-[p i ___nop ]
-"9825 C:\Program Files (x86)\Microchip\xc8\v1.37\include\pic18f97j60.h
+"9825
 [s S476 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S476 . CCP3IF CCP4IF CCP5IF TMR4IF TX2IF RC2IF BCL2IF SSP2IF ]
 "9835
@@ -6601,563 +6594,537 @@ Version 3.2 HI-TECH Software Intermediate Code
 "93
 [e :UE 782 ]
 }
-"36 exprom.h
+"28 exprom.h
 [v _EEDELAY `Cul ~T0 @X0 1 e ]
 [i _EEDELAY
 -> -> -> 30 `i `l `ul
 ]
-[; ;exprom.h: 36: const unsigned long EEDELAY = 30;
-"38
-[v _wait `(v ~T0 @X0 1 ef ]
+[; ;exprom.h: 28: const unsigned long EEDELAY = 30;
+"30
+[v _eeWait `(v ~T0 @X0 1 ef ]
 {
-[; ;exprom.h: 38: void wait() {
-[e :U _wait ]
+[; ;exprom.h: 30: void eeWait() {
+[e :U _eeWait ]
 [f ]
-[; ;exprom.h: 41: while((SSP1STATbits).BF == 0);
-"41
+[; ;exprom.h: 31: while ((SSP1STATbits).BF == 0);
+"31
 [e $U 788  ]
 [e :U 789 ]
 [e :U 788 ]
 [e $ == -> . . _SSP1STATbits 2 0 `i -> 0 `i 789  ]
 [e :U 790 ]
-[; ;exprom.h: 42: }
-"42
+[; ;exprom.h: 32: }
+"32
 [e :UE 787 ]
 }
-"44
-[v _XEEInit `(v ~T0 @X0 1 ef ]
+"34
+[v _eepromInit `(v ~T0 @X0 1 ef ]
 {
-[; ;exprom.h: 44: void XEEInit(void) {
-[e :U _XEEInit ]
+[; ;exprom.h: 34: void eepromInit(void) {
+[e :U _eepromInit ]
 [f ]
-[; ;exprom.h: 45: (PORTCbits.RC6) = 1;
-"45
+[; ;exprom.h: 35: (PORTCbits.RC6) = 1;
+"35
 [e = . . _PORTCbits 0 6 -> -> 1 `i `uc ]
-[; ;exprom.h: 46: (TRISCbits.TRISC6) = 0;
-"46
+[; ;exprom.h: 36: (TRISCbits.TRISC6) = 0;
+"36
 [e = . . _TRISCbits 0 6 -> -> 0 `i `uc ]
-[; ;exprom.h: 48: (TRISCbits.TRISC3) = 0;
-"48
+[; ;exprom.h: 38: (TRISCbits.TRISC3) = 0;
+"38
 [e = . . _TRISCbits 0 3 -> -> 0 `i `uc ]
-[; ;exprom.h: 49: (TRISCbits.TRISC4) = 1;
-"49
+[; ;exprom.h: 39: (TRISCbits.TRISC4) = 1;
+"39
 [e = . . _TRISCbits 0 4 -> -> 1 `i `uc ]
-[; ;exprom.h: 50: (TRISCbits.TRISC5) = 0;
-"50
+[; ;exprom.h: 40: (TRISCbits.TRISC5) = 0;
+"40
 [e = . . _TRISCbits 0 5 -> -> 0 `i `uc ]
-[; ;exprom.h: 52: BAUDCON1 = 0x00;
-"52
+[; ;exprom.h: 42: BAUDCON1 = 0x00;
+"42
 [e = _BAUDCON1 -> -> 0 `i `uc ]
-[; ;exprom.h: 60: SPI1init();
-"60
+[; ;exprom.h: 44: SPI1init();
+"44
 [e ( _SPI1init ..  ]
-[; ;exprom.h: 61: SPI1out(0x00);
-"61
+[; ;exprom.h: 45: SPI1out(0x00);
+"45
 [e ( _SPI1out (1 -> -> 0 `i `uc ]
-[; ;exprom.h: 62: }
-"62
+[; ;exprom.h: 46: }
+"46
 [e :UE 791 ]
 }
-"65
-[v _XEERead `(uc ~T0 @X0 1 ef1`uc ]
-"67
+"48
+[v _eepromRead `(uc ~T0 @X0 1 ef1`uc ]
+"50
 {
-[; ;exprom.h: 65: unsigned char XEERead(
-[; ;exprom.h: 66: unsigned char address
-[; ;exprom.h: 67: ) {
-[e :U _XEERead ]
-"66
+[; ;exprom.h: 48: unsigned char eepromRead(
+[; ;exprom.h: 49: unsigned char address
+[; ;exprom.h: 50: ) {
+[e :U _eepromRead ]
+"49
 [v _address `uc ~T0 @X0 1 r1 ]
-"67
+"50
 [f ]
-[; ;exprom.h: 68: (PORTCbits.RC6) = 0;
-"68
+[; ;exprom.h: 51: (PORTCbits.RC6) = 0;
+"51
 [e = . . _PORTCbits 0 6 -> -> 0 `i `uc ]
-[; ;exprom.h: 70: SPI1out(0x03);
-"70
+[; ;exprom.h: 53: SPI1out(0x03);
+"53
 [e ( _SPI1out (1 -> -> 3 `i `uc ]
-[; ;exprom.h: 71: SPI1out(((address)>>8)&0xFF);
-"71
+[; ;exprom.h: 54: SPI1out(((address)>>8)&0xFF);
+"54
 [e ( _SPI1out (1 -> & >> -> _address `i -> 8 `i -> 255 `i `uc ]
-[; ;exprom.h: 72: SPI1out(address&0xFF);
-"72
+[; ;exprom.h: 55: SPI1out(address&0xFF);
+"55
 [e ( _SPI1out (1 -> & -> _address `i -> 255 `i `uc ]
-[; ;exprom.h: 74: (SSP1BUF) = 0x00;
-"74
+[; ;exprom.h: 57: (SSP1BUF) = 0x00;
+"57
 [e = _SSP1BUF -> -> 0 `i `uc ]
-[; ;exprom.h: 75: wait();
-"75
-[e ( _wait ..  ]
-"77
+[; ;exprom.h: 58: eeWait();
+"58
+[e ( _eeWait ..  ]
+"60
 [v _buffer `uc ~T0 @X0 1 a ]
-[; ;exprom.h: 77: unsigned char buffer = (SSP1BUF);
+[; ;exprom.h: 60: unsigned char buffer = (SSP1BUF);
 [e = _buffer _SSP1BUF ]
-[; ;exprom.h: 79: (PORTCbits.RC6) = 1;
-"79
+[; ;exprom.h: 62: (PORTCbits.RC6) = 1;
+"62
 [e = . . _PORTCbits 0 6 -> -> 1 `i `uc ]
-[; ;exprom.h: 80: return buffer;
-"80
+[; ;exprom.h: 63: return buffer;
+"63
 [e ) _buffer ]
 [e $UE 792  ]
-[; ;exprom.h: 81: }
-"81
+[; ;exprom.h: 64: }
+"64
 [e :UE 792 ]
 }
-"83
-[v _eeWriteChar `(v ~T0 @X0 1 sf2`uc`uc ]
+"66
+[v _eepromWrite `(v ~T0 @X0 1 sf2`uc`uc ]
 {
-[; ;exprom.h: 83: static void eeWriteChar(unsigned char address, unsigned char value) {
-[e :U _eeWriteChar ]
+[; ;exprom.h: 66: static void eepromWrite(unsigned char address, unsigned char value) {
+[e :U _eepromWrite ]
 [v _address `uc ~T0 @X0 1 r1 ]
 [v _value `uc ~T0 @X0 1 r2 ]
 [f ]
-"89
+"71
 [v _sr `uc ~T0 @X0 1 a ]
-[; ;exprom.h: 89: unsigned char sr = 0x00;
+[; ;exprom.h: 71: unsigned char sr = 0x00;
 [e = _sr -> -> 0 `i `uc ]
-[; ;exprom.h: 91: while (1) {
-"91
+[; ;exprom.h: 73: while (1) {
+"73
 [e :U 795 ]
 {
-[; ;exprom.h: 101: (PORTCbits.RC6) = 0;
-"101
+[; ;exprom.h: 83: (PORTCbits.RC6) = 0;
+"83
 [e = . . _PORTCbits 0 6 -> -> 0 `i `uc ]
-[; ;exprom.h: 102: SPI1out(0x06);
-"102
+[; ;exprom.h: 84: SPI1out(0x06);
+"84
 [e ( _SPI1out (1 -> -> 6 `i `uc ]
-[; ;exprom.h: 103: delay_ms(30);
-"103
-[e ( _delay_ms (1 -> 30 `i ]
-[; ;exprom.h: 104: SPI1out(0x05);
-"104
+[; ;exprom.h: 85: SPI1out(0x05);
+"85
 [e ( _SPI1out (1 -> -> 5 `i `uc ]
-[; ;exprom.h: 107: (PORTCbits.RC6) = 1;
-"107
+[; ;exprom.h: 88: (PORTCbits.RC6) = 1;
+"88
 [e = . . _PORTCbits 0 6 -> -> 1 `i `uc ]
-[; ;exprom.h: 108: (SSP1BUF) = 0x00;
-"108
+[; ;exprom.h: 89: (SSP1BUF) = 0x00;
+"89
 [e = _SSP1BUF -> -> 0 `i `uc ]
-[; ;exprom.h: 110: wait();
-"110
-[e ( _wait ..  ]
-[; ;exprom.h: 113: sr = (SSP1BUF);
-"113
+[; ;exprom.h: 91: eeWait();
+"91
+[e ( _eeWait ..  ]
+[; ;exprom.h: 94: sr = (SSP1BUF);
+"94
 [e = _sr _SSP1BUF ]
-[; ;exprom.h: 115: if (sr & 0x02 == 0x02) { break; }
-"115
+[; ;exprom.h: 96: if (sr & 0x02 == 0x02) { break; }
+"96
 [e $ ! != & -> _sr `i -> == -> 2 `i -> 2 `i `i -> 0 `i 797  ]
 {
 [e $U 796  ]
 }
 [e :U 797 ]
-"116
+"97
 }
 [e :U 794 ]
-"91
+"73
 [e $U 795  ]
 [e :U 796 ]
-[; ;exprom.h: 116: }
-[; ;exprom.h: 120: (PORTCbits.RC6) = 0;
-"120
+[; ;exprom.h: 97: }
+[; ;exprom.h: 101: (PORTCbits.RC6) = 0;
+"101
 [e = . . _PORTCbits 0 6 -> -> 0 `i `uc ]
-[; ;exprom.h: 121: SPI1out(0x02);
-"121
+[; ;exprom.h: 102: SPI1out(0x02);
+"102
 [e ( _SPI1out (1 -> -> 2 `i `uc ]
-[; ;exprom.h: 122: SPI1out(((address)>>8)&0xFF);
-"122
+[; ;exprom.h: 103: SPI1out(((address)>>8)&0xFF);
+"103
 [e ( _SPI1out (1 -> & >> -> _address `i -> 8 `i -> 255 `i `uc ]
-[; ;exprom.h: 123: SPI1out(address&0xFF);
-"123
+[; ;exprom.h: 104: SPI1out(address&0xFF);
+"104
 [e ( _SPI1out (1 -> & -> _address `i -> 255 `i `uc ]
-[; ;exprom.h: 124: SPI1out(value);
-"124
+[; ;exprom.h: 105: SPI1out(value);
+"105
 [e ( _SPI1out (1 _value ]
-[; ;exprom.h: 126: delay_ms(100);
-"126
-[e ( _delay_ms (1 -> 100 `i ]
-[; ;exprom.h: 127: (PORTCbits.RC6) = 1;
-"127
+[; ;exprom.h: 107: (PORTCbits.RC6) = 1;
+"107
 [e = . . _PORTCbits 0 6 -> -> 1 `i `uc ]
-[; ;exprom.h: 128: }
-"128
+[; ;exprom.h: 108: }
+"108
 [e :UE 793 ]
 }
-"12 EEPROM.h
-[v _testConfig `(v ~T0 @X0 1 ef ]
-{
-[; ;EEPROM.h: 12: void testConfig() {
-[e :U _testConfig ]
-[f ]
-[; ;EEPROM.h: 13: SSPBUF = 2;
-"13
-[e = _SSPBUF -> -> 2 `i `uc ]
-[; ;EEPROM.h: 14: }
-"14
-[e :UE 798 ]
-}
-"16
+"14 EEPROM.h
 [v _cmpEEPROM `(uc ~T0 @X0 1 ef2`*uc`*uc ]
 {
-[; ;EEPROM.h: 16: char cmpEEPROM(unsigned char input[], unsigned char check[]) {
+[; ;EEPROM.h: 14: char cmpEEPROM(unsigned char input[], unsigned char check[]) {
 [e :U _cmpEEPROM ]
 [v _input `*uc ~T0 @X0 1 r1 ]
 [v _check `*uc ~T0 @X0 1 r2 ]
 [f ]
-[; ;EEPROM.h: 17: for (unsigned int i = 0;; i++) {
-"17
+[; ;EEPROM.h: 15: for (unsigned int i = 0;; i++) {
+"15
 {
 [v _i `ui ~T0 @X0 1 a ]
 [e = _i -> -> 0 `i `ui ]
-[e :U 800 ]
+[e :U 799 ]
 {
-"18
+"16
 [v _inputChar `uc ~T0 @X0 1 a ]
-[; ;EEPROM.h: 18: unsigned char inputChar = input[i];
+[; ;EEPROM.h: 16: unsigned char inputChar = input[i];
 [e = _inputChar *U + _input * -> _i `ux -> -> # *U _input `ui `ux ]
-"19
+"17
 [v _checkChar `uc ~T0 @X0 1 a ]
-[; ;EEPROM.h: 19: unsigned char checkChar = check[i];
+[; ;EEPROM.h: 17: unsigned char checkChar = check[i];
 [e = _checkChar *U + _check * -> _i `ux -> -> # *U _check `ui `ux ]
-[; ;EEPROM.h: 20: if (inputChar == 0xff) {inputChar = 0; }
-"20
-[e $ ! == -> _inputChar `i -> 255 `i 803  ]
+[; ;EEPROM.h: 18: if (inputChar == 0xff) {inputChar = 0; }
+"18
+[e $ ! == -> _inputChar `i -> 255 `i 802  ]
 {
 [e = _inputChar -> -> 0 `i `uc ]
 }
-[e :U 803 ]
-[; ;EEPROM.h: 21: if (checkChar == 0xff) {checkChar = 0; }
-"21
-[e $ ! == -> _checkChar `i -> 255 `i 804  ]
+[e :U 802 ]
+[; ;EEPROM.h: 19: if (checkChar == 0xff) {checkChar = 0; }
+"19
+[e $ ! == -> _checkChar `i -> 255 `i 803  ]
 {
 [e = _checkChar -> -> 0 `i `uc ]
 }
-[e :U 804 ]
-[; ;EEPROM.h: 23: if (inputChar == '\0' && checkChar == '\0') { break; }
-"23
-[e $ ! && == -> _inputChar `ui -> 0 `ui == -> _checkChar `ui -> 0 `ui 805  ]
+[e :U 803 ]
+[; ;EEPROM.h: 21: if (inputChar == '\0' && checkChar == '\0') { break; }
+"21
+[e $ ! && == -> _inputChar `ui -> 0 `ui == -> _checkChar `ui -> 0 `ui 804  ]
 {
-[e $U 801  ]
-}
-[e $U 806  ]
-"24
-[e :U 805 ]
-[; ;EEPROM.h: 24: else if (inputChar == '\0' && checkChar != '\0') { return 1; }
-[e $ ! && == -> _inputChar `ui -> 0 `ui != -> _checkChar `ui -> 0 `ui 807  ]
-{
-[e ) -> -> 1 `i `uc ]
-[e $UE 799  ]
-}
-[e $U 808  ]
-"25
-[e :U 807 ]
-[; ;EEPROM.h: 25: else if (inputChar != '\0' && checkChar == '\0') { return -1; }
-[e $ ! && != -> _inputChar `ui -> 0 `ui == -> _checkChar `ui -> 0 `ui 809  ]
-{
-[e ) -> -U -> 1 `i `uc ]
-[e $UE 799  ]
-}
-[e $U 810  ]
-"26
-[e :U 809 ]
-[; ;EEPROM.h: 26: else if (inputChar > checkChar) { return 1; }
-[e $ ! > -> _inputChar `i -> _checkChar `i 811  ]
-{
-[e ) -> -> 1 `i `uc ]
-[e $UE 799  ]
-}
-[e $U 812  ]
-"27
-[e :U 811 ]
-[; ;EEPROM.h: 27: else if (inputChar < checkChar) { return -1; }
-[e $ ! < -> _inputChar `i -> _checkChar `i 813  ]
-{
-[e ) -> -U -> 1 `i `uc ]
-[e $UE 799  ]
-}
-[e $U 814  ]
-"28
-[e :U 813 ]
-[; ;EEPROM.h: 28: else {}
-{
-}
-[e :U 814 ]
-[e :U 812 ]
-[e :U 810 ]
-[e :U 808 ]
-[e :U 806 ]
-"29
-}
-"17
-[e ++ _i -> -> 1 `i `ui ]
 [e $U 800  ]
-[e :U 801 ]
-"29
 }
-[; ;EEPROM.h: 29: }
-[; ;EEPROM.h: 30: return 0;
-"30
+[e $U 805  ]
+"22
+[e :U 804 ]
+[; ;EEPROM.h: 22: else if (inputChar == '\0' && checkChar != '\0') { return 1; }
+[e $ ! && == -> _inputChar `ui -> 0 `ui != -> _checkChar `ui -> 0 `ui 806  ]
+{
+[e ) -> -> 1 `i `uc ]
+[e $UE 798  ]
+}
+[e $U 807  ]
+"23
+[e :U 806 ]
+[; ;EEPROM.h: 23: else if (inputChar != '\0' && checkChar == '\0') { return -1; }
+[e $ ! && != -> _inputChar `ui -> 0 `ui == -> _checkChar `ui -> 0 `ui 808  ]
+{
+[e ) -> -U -> 1 `i `uc ]
+[e $UE 798  ]
+}
+[e $U 809  ]
+"24
+[e :U 808 ]
+[; ;EEPROM.h: 24: else if (inputChar > checkChar) { return 1; }
+[e $ ! > -> _inputChar `i -> _checkChar `i 810  ]
+{
+[e ) -> -> 1 `i `uc ]
+[e $UE 798  ]
+}
+[e $U 811  ]
+"25
+[e :U 810 ]
+[; ;EEPROM.h: 25: else if (inputChar < checkChar) { return -1; }
+[e $ ! < -> _inputChar `i -> _checkChar `i 812  ]
+{
+[e ) -> -U -> 1 `i `uc ]
+[e $UE 798  ]
+}
+[e $U 813  ]
+"26
+[e :U 812 ]
+[; ;EEPROM.h: 26: else {}
+{
+}
+[e :U 813 ]
+[e :U 811 ]
+[e :U 809 ]
+[e :U 807 ]
+[e :U 805 ]
+"27
+}
+"15
+[e ++ _i -> -> 1 `i `ui ]
+[e $U 799  ]
+[e :U 800 ]
+"27
+}
+[; ;EEPROM.h: 27: }
+[; ;EEPROM.h: 28: return 0;
+"28
 [e ) -> -> 0 `i `uc ]
-[e $UE 799  ]
-[; ;EEPROM.h: 31: }
-"31
-[e :UE 799 ]
+[e $UE 798  ]
+[; ;EEPROM.h: 29: }
+"29
+[e :UE 798 ]
 }
-"33
+"31
 [v _cmpEEPROML `(uc ~T0 @X0 1 ef3`*uc`*uc`Cui ]
 {
-[; ;EEPROM.h: 33: char cmpEEPROML(unsigned char input[], unsigned char check[], const unsigned int length) {
+[; ;EEPROM.h: 31: char cmpEEPROML(unsigned char input[], unsigned char check[], const unsigned int length) {
 [e :U _cmpEEPROML ]
 [v _input `*uc ~T0 @X0 1 r1 ]
 [v _check `*uc ~T0 @X0 1 r2 ]
 [v _length `Cui ~T0 @X0 1 r3 ]
 [f ]
-[; ;EEPROM.h: 34: for (unsigned int i = 0; i<length ; i++) {
-"34
+[; ;EEPROM.h: 32: for (unsigned int i = 0; i<length ; i++) {
+"32
 {
 [v _i `ui ~T0 @X0 1 a ]
 [e = _i -> -> 0 `i `ui ]
-[e $ < _i _length 816  ]
-[e $U 817  ]
-[e :U 816 ]
+[e $ < _i _length 815  ]
+[e $U 816  ]
+[e :U 815 ]
 {
-"35
+"33
 [v _inputChar `uc ~T0 @X0 1 a ]
-[; ;EEPROM.h: 35: unsigned char inputChar = input[i];
+[; ;EEPROM.h: 33: unsigned char inputChar = input[i];
 [e = _inputChar *U + _input * -> _i `ux -> -> # *U _input `ui `ux ]
-"36
+"34
 [v _checkChar `uc ~T0 @X0 1 a ]
-[; ;EEPROM.h: 36: unsigned char checkChar = check[i];
+[; ;EEPROM.h: 34: unsigned char checkChar = check[i];
 [e = _checkChar *U + _check * -> _i `ux -> -> # *U _check `ui `ux ]
-[; ;EEPROM.h: 37: if (inputChar == 0xff) {inputChar = 0; }
-"37
-[e $ ! == -> _inputChar `i -> 255 `i 819  ]
+[; ;EEPROM.h: 35: if (inputChar == 0xff) {inputChar = 0; }
+"35
+[e $ ! == -> _inputChar `i -> 255 `i 818  ]
 {
 [e = _inputChar -> -> 0 `i `uc ]
 }
-[e :U 819 ]
-[; ;EEPROM.h: 38: if (checkChar == 0xff) {checkChar = 0; }
-"38
-[e $ ! == -> _checkChar `i -> 255 `i 820  ]
+[e :U 818 ]
+[; ;EEPROM.h: 36: if (checkChar == 0xff) {checkChar = 0; }
+"36
+[e $ ! == -> _checkChar `i -> 255 `i 819  ]
 {
 [e = _checkChar -> -> 0 `i `uc ]
 }
+[e :U 819 ]
+[; ;EEPROM.h: 38: if (inputChar == '\0' && checkChar == '\0') { break; }
+"38
+[e $ ! && == -> _inputChar `ui -> 0 `ui == -> _checkChar `ui -> 0 `ui 820  ]
+{
+[e $U 816  ]
+}
+[e $U 821  ]
+"39
 [e :U 820 ]
-[; ;EEPROM.h: 40: if (inputChar == '\0' && checkChar == '\0') { break; }
+[; ;EEPROM.h: 39: else if (inputChar == '\0' && checkChar != '\0') { return 1; }
+[e $ ! && == -> _inputChar `ui -> 0 `ui != -> _checkChar `ui -> 0 `ui 822  ]
+{
+[e ) -> -> 1 `i `uc ]
+[e $UE 814  ]
+}
+[e $U 823  ]
 "40
-[e $ ! && == -> _inputChar `ui -> 0 `ui == -> _checkChar `ui -> 0 `ui 821  ]
-{
-[e $U 817  ]
-}
-[e $U 822  ]
-"41
-[e :U 821 ]
-[; ;EEPROM.h: 41: else if (inputChar == '\0' && checkChar != '\0') { return 1; }
-[e $ ! && == -> _inputChar `ui -> 0 `ui != -> _checkChar `ui -> 0 `ui 823  ]
-{
-[e ) -> -> 1 `i `uc ]
-[e $UE 815  ]
-}
-[e $U 824  ]
-"42
-[e :U 823 ]
-[; ;EEPROM.h: 42: else if (inputChar != '\0' && checkChar == '\0') { return -1; }
-[e $ ! && != -> _inputChar `ui -> 0 `ui == -> _checkChar `ui -> 0 `ui 825  ]
-{
-[e ) -> -U -> 1 `i `uc ]
-[e $UE 815  ]
-}
-[e $U 826  ]
-"43
-[e :U 825 ]
-[; ;EEPROM.h: 43: else if (inputChar > checkChar) { return 1; }
-[e $ ! > -> _inputChar `i -> _checkChar `i 827  ]
-{
-[e ) -> -> 1 `i `uc ]
-[e $UE 815  ]
-}
-[e $U 828  ]
-"44
-[e :U 827 ]
-[; ;EEPROM.h: 44: else if (inputChar < checkChar) { return -1; }
-[e $ ! < -> _inputChar `i -> _checkChar `i 829  ]
-{
-[e ) -> -U -> 1 `i `uc ]
-[e $UE 815  ]
-}
-[e $U 830  ]
-"45
-[e :U 829 ]
-[; ;EEPROM.h: 45: else {}
-{
-}
-[e :U 830 ]
-[e :U 828 ]
-[e :U 826 ]
-[e :U 824 ]
 [e :U 822 ]
-"46
+[; ;EEPROM.h: 40: else if (inputChar != '\0' && checkChar == '\0') { return -1; }
+[e $ ! && != -> _inputChar `ui -> 0 `ui == -> _checkChar `ui -> 0 `ui 824  ]
+{
+[e ) -> -U -> 1 `i `uc ]
+[e $UE 814  ]
 }
-"34
+[e $U 825  ]
+"41
+[e :U 824 ]
+[; ;EEPROM.h: 41: else if (inputChar > checkChar) { return 1; }
+[e $ ! > -> _inputChar `i -> _checkChar `i 826  ]
+{
+[e ) -> -> 1 `i `uc ]
+[e $UE 814  ]
+}
+[e $U 827  ]
+"42
+[e :U 826 ]
+[; ;EEPROM.h: 42: else if (inputChar < checkChar) { return -1; }
+[e $ ! < -> _inputChar `i -> _checkChar `i 828  ]
+{
+[e ) -> -U -> 1 `i `uc ]
+[e $UE 814  ]
+}
+[e $U 829  ]
+"43
+[e :U 828 ]
+[; ;EEPROM.h: 43: else {}
+{
+}
+[e :U 829 ]
+[e :U 827 ]
+[e :U 825 ]
+[e :U 823 ]
+[e :U 821 ]
+"44
+}
+"32
 [e ++ _i -> -> 1 `i `ui ]
-[e $ < _i _length 816  ]
-[e :U 817 ]
-"46
+[e $ < _i _length 815  ]
+[e :U 816 ]
+"44
 }
-[; ;EEPROM.h: 46: }
-[; ;EEPROM.h: 47: return 0;
-"47
+[; ;EEPROM.h: 44: }
+[; ;EEPROM.h: 45: return 0;
+"45
 [e ) -> -> 0 `i `uc ]
-[e $UE 815  ]
-[; ;EEPROM.h: 48: }
-"48
-[e :UE 815 ]
+[e $UE 814  ]
+[; ;EEPROM.h: 46: }
+"46
+[e :UE 814 ]
 }
-"50
+"48
 [v _ee_write `(v ~T0 @X0 1 ef2`ui`*uc ]
 {
-[; ;EEPROM.h: 50: void ee_write(unsigned int address, unsigned char _data[]) {
+[; ;EEPROM.h: 48: void ee_write(unsigned int address, unsigned char _data[]) {
 [e :U _ee_write ]
 [v _address `ui ~T0 @X0 1 r1 ]
 [v __data `*uc ~T0 @X0 1 r2 ]
 [f ]
-[; ;EEPROM.h: 51: for (volatile int index = 0; _data[index] != '\0'; index++) {
-"51
+[; ;EEPROM.h: 49: for (volatile int index = 0; _data[index] != '\0'; index++) {
+"49
 {
 [v _index `Vi ~T0 @X0 1 a ]
 [e = _index -> 0 `i ]
-[e $U 835  ]
-[e :U 832 ]
+[e $U 834  ]
+[e :U 831 ]
 {
-[; ;EEPROM.h: 52: ;
-"53
-}
+[; ;EEPROM.h: 50: ;
 "51
+}
+"49
 [e ++ _index -> 1 `i ]
-[e :U 835 ]
-[e $ != -> *U + __data * -> _index `x -> -> # *U __data `i `x `ui -> 0 `ui 832  ]
-[e :U 833 ]
-"53
+[e :U 834 ]
+[e $ != -> *U + __data * -> _index `x -> -> # *U __data `i `x `ui -> 0 `ui 831  ]
+[e :U 832 ]
+"51
 }
-[; ;EEPROM.h: 53: }
-[; ;EEPROM.h: 54: }
+[; ;EEPROM.h: 51: }
+[; ;EEPROM.h: 52: }
+"52
+[e :UE 830 ]
+}
 "54
-[e :UE 831 ]
-}
-"68
 [v _ee_write_char `(v ~T0 @X0 1 ef2`uc`Cuc ]
 {
-[; ;EEPROM.h: 68: void ee_write_char(unsigned char address, const unsigned char chunk) {
+[; ;EEPROM.h: 54: void ee_write_char(unsigned char address, const unsigned char chunk) {
 [e :U _ee_write_char ]
 [v _address `uc ~T0 @X0 1 r1 ]
 [v _chunk `Cuc ~T0 @X0 1 r2 ]
 [f ]
-[; ;EEPROM.h: 93: eeWriteChar(address, chunk);
-"93
-[e ( _eeWriteChar (2 , _address _chunk ]
-[; ;EEPROM.h: 95: }
-"95
-[e :UE 836 ]
+[; ;EEPROM.h: 55: eepromWrite(address, chunk);
+"55
+[e ( _eepromWrite (2 , _address _chunk ]
+[; ;EEPROM.h: 56: }
+"56
+[e :UE 835 ]
 }
-"97
+"58
 [v _writeEEPROM `(v ~T0 @X0 1 ef1`*uc ]
 {
-[; ;EEPROM.h: 97: void writeEEPROM(unsigned char _data[]) {
+[; ;EEPROM.h: 58: void writeEEPROM(unsigned char _data[]) {
 [e :U _writeEEPROM ]
 [v __data `*uc ~T0 @X0 1 r1 ]
 [f ]
-[; ;EEPROM.h: 98: for (unsigned volatile char i=0; i<8; i++) {
-"98
+[; ;EEPROM.h: 59: for (unsigned volatile char i=0; i<8; i++) {
+"59
 {
 [v _i `Vuc ~T0 @X0 1 a ]
 [e = _i -> -> 0 `i `uc ]
-[e $ < -> _i `i -> 8 `i 838  ]
-[e $U 839  ]
-[e :U 838 ]
+[e $ < -> _i `i -> 8 `i 837  ]
+[e $U 838  ]
+[e :U 837 ]
 {
-[; ;EEPROM.h: 99: ee_write_byte(i, _data+i);
-"99
-[e ( _ee_write_byte , -> _i `i + __data * -> _i `ux -> -> # *U __data `ui `ux ]
-[; ;EEPROM.h: 100: __nop();__nop();__nop();__nop();__nop();
-"100
-[e ( ___nop ..  ]
-[e ( ___nop ..  ]
-[e ( ___nop ..  ]
-[e ( ___nop ..  ]
-[e ( ___nop ..  ]
-[; ;EEPROM.h: 103: delay_ms(20);
-"103
+[; ;EEPROM.h: 60: ee_write_char(i, _data+i);
+"60
+[e ( _ee_write_char (2 , _i -> + __data * -> _i `ux -> -> # *U __data `ui `ux `Cuc ]
+[; ;EEPROM.h: 63: delay_ms(20);
+"63
 [e ( _delay_ms (1 -> 20 `i ]
-[; ;EEPROM.h: 104: if (_data[i] == '\0') {break;};
-"104
-[e $ ! == -> *U + __data * -> _i `ux -> -> # *U __data `ui `ux `ui -> 0 `ui 841  ]
+[; ;EEPROM.h: 64: if (_data[i] == '\0') {break;};
+"64
+[e $ ! == -> *U + __data * -> _i `ux -> -> # *U __data `ui `ux `ui -> 0 `ui 840  ]
 {
-[e $U 839  ]
+[e $U 838  ]
 }
-[e :U 841 ]
-"105
+[e :U 840 ]
+"65
 }
-"98
+"59
 [e ++ _i -> -> 1 `i `uc ]
-[e $ < -> _i `i -> 8 `i 838  ]
-[e :U 839 ]
-"105
+[e $ < -> _i `i -> 8 `i 837  ]
+[e :U 838 ]
+"65
 }
-[; ;EEPROM.h: 105: }
-[; ;EEPROM.h: 106: }
-"106
-[e :UE 837 ]
+[; ;EEPROM.h: 65: }
+[; ;EEPROM.h: 66: }
+"66
+[e :UE 836 ]
 }
-"108
-[v _ee_read_byte `(v ~T0 @X0 1 ef2`uc`*uc ]
+"68
+[v _ee_read_char `(v ~T0 @X0 1 ef2`uc`*uc ]
 {
-[; ;EEPROM.h: 108: void ee_read_byte(unsigned char address, unsigned char *_data){
-[e :U _ee_read_byte ]
+[; ;EEPROM.h: 68: void ee_read_char(unsigned char address, unsigned char *_data){
+[e :U _ee_read_char ]
 [v _address `uc ~T0 @X0 1 r1 ]
 [v __data `*uc ~T0 @X0 1 r2 ]
 [f ]
-[; ;EEPROM.h: 117: *_data = XEERead(address);
-"117
-[e = *U __data ( _XEERead (1 _address ]
-[; ;EEPROM.h: 120: }
-"120
-[e :UE 842 ]
+[; ;EEPROM.h: 69: *_data = eepromRead(address);
+"69
+[e = *U __data ( _eepromRead (1 _address ]
+[; ;EEPROM.h: 70: }
+"70
+[e :UE 841 ]
 }
-"122
+"72
 [v _readEEPROM `(v ~T0 @X0 1 ef1`*uc ]
 {
-[; ;EEPROM.h: 122: void readEEPROM(unsigned char _data[]) {
+[; ;EEPROM.h: 72: void readEEPROM(unsigned char _data[]) {
 [e :U _readEEPROM ]
 [v __data `*uc ~T0 @X0 1 r1 ]
 [f ]
-[; ;EEPROM.h: 123: for (int i=0;; i++) {
-"123
+[; ;EEPROM.h: 73: for (int i=0;; i++) {
+"73
 {
 [v _i `i ~T0 @X0 1 a ]
 [e = _i -> 0 `i ]
-[e :U 844 ]
+[e :U 843 ]
 {
-[; ;EEPROM.h: 124: ee_read_byte(i, _data+i);
-"124
-[e ( _ee_read_byte (2 , -> _i `uc + __data * -> _i `x -> -> # *U __data `i `x ]
-[; ;EEPROM.h: 125: if (_data[i] == '\0' || _data[i] == 0xff) {break;}
-"125
-[e $ ! || == -> *U + __data * -> _i `x -> -> # *U __data `i `x `ui -> 0 `ui == -> *U + __data * -> _i `x -> -> # *U __data `i `x `i -> 255 `i 847  ]
+[; ;EEPROM.h: 74: ee_read_char(i, _data+i);
+"74
+[e ( _ee_read_char (2 , -> _i `uc + __data * -> _i `x -> -> # *U __data `i `x ]
+[; ;EEPROM.h: 75: if (_data[i] == '\0' || _data[i] == 0xff) {break;}
+"75
+[e $ ! || == -> *U + __data * -> _i `x -> -> # *U __data `i `x `ui -> 0 `ui == -> *U + __data * -> _i `x -> -> # *U __data `i `x `i -> 255 `i 846  ]
 {
-[e $U 845  ]
-}
-[e :U 847 ]
-"126
-}
-"123
-[e ++ _i -> 1 `i ]
 [e $U 844  ]
-[e :U 845 ]
-"126
 }
-[; ;EEPROM.h: 126: }
-[; ;EEPROM.h: 127: }
-"127
-[e :UE 843 ]
+[e :U 846 ]
+"76
+}
+"73
+[e ++ _i -> 1 `i ]
+[e $U 843  ]
+[e :U 844 ]
+"76
+}
+[; ;EEPROM.h: 76: }
+[; ;EEPROM.h: 77: }
+"77
+[e :UE 842 ]
 }
 "6 test.c
 [p x XINST=OFF ]
@@ -7213,9 +7180,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 ..
 ]
 [; ;test.c: 16: unsigned char keyValues[16] = "0123456789ABCD*#";
-[v F6796 `(v ~T0 @X0 1 tf ]
+[v F6794 `(v ~T0 @X0 1 tf ]
 "18
-[v _HighIsr `IF6796 ~T0 @X0 1 e ]
+[v _HighIsr `IF6794 ~T0 @X0 1 e ]
 "19
 {
 [; ;test.c: 18: void interrupt HighIsr(void)
@@ -7224,7 +7191,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [f ]
 [; ;test.c: 20: if (PIR3bits.TMR4IF==1)
 "20
-[e $ ! == -> . . _PIR3bits 0 3 `i -> 1 `i 849  ]
+[e $ ! == -> . . _PIR3bits 0 3 `i -> 1 `i 848  ]
 [; ;test.c: 21: {
 "21
 {
@@ -7233,7 +7200,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e ++ _counter -> 1 `i ]
 [; ;test.c: 23: if (counter>=1000)
 "23
-[e $ ! >= _counter -> 1000 `i 850  ]
+[e $ ! >= _counter -> 1000 `i 849  ]
 [; ;test.c: 24: {
 "24
 {
@@ -7245,22 +7212,22 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e = _counter -> 0 `i ]
 "27
 }
-[e :U 850 ]
+[e :U 849 ]
 [; ;test.c: 27: }
 [; ;test.c: 28: PIR3bits.TMR4IF = 0;
 "28
 [e = . . _PIR3bits 0 3 -> -> 0 `i `uc ]
 "29
 }
-[e :U 849 ]
+[e :U 848 ]
 [; ;test.c: 29: }
 [; ;test.c: 30: }
 "30
-[e :UE 848 ]
+[e :UE 847 ]
 }
-[v F6799 `(v ~T0 @X0 1 tf ]
+[v F6797 `(v ~T0 @X0 1 tf ]
 "32
-[v _LowIsr `ILF6799 ~T0 @X0 1 e ]
+[v _LowIsr `ILF6797 ~T0 @X0 1 e ]
 "33
 {
 [; ;test.c: 32: void interrupt low_priority LowIsr(void)
@@ -7269,7 +7236,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [f ]
 [; ;test.c: 35: }
 "35
-[e :UE 851 ]
+[e :UE 850 ]
 }
 "37
 [v _lcdWriteLine `(v ~T0 @X0 1 ef1`*uc ]
@@ -7283,8 +7250,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 {
 [v _i `i ~T0 @X0 1 a ]
 [e = _i -> 0 `i ]
-[e $U 856  ]
-[e :U 853 ]
+[e $U 855  ]
+[e :U 852 ]
 {
 [; ;test.c: 39: LCD8send(data[i], 1);
 "39
@@ -7293,15 +7260,15 @@ Version 3.2 HI-TECH Software Intermediate Code
 }
 "38
 [e ++ _i -> 1 `i ]
-[e :U 856 ]
-[e $ != -> *U + _data * -> _i `x -> -> # *U _data `i `x `i -> 0 `i 853  ]
-[e :U 854 ]
+[e :U 855 ]
+[e $ != -> *U + _data * -> _i `x -> -> # *U _data `i `x `i -> 0 `i 852  ]
+[e :U 853 ]
 "40
 }
 [; ;test.c: 40: }
 [; ;test.c: 41: }
 "41
-[e :UE 852 ]
+[e :UE 851 ]
 }
 "43
 [v _writeNum `(v ~T0 @X0 1 ef1`uc ]
@@ -7321,7 +7288,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e ( _lcdWriteLine (1 &U _numStr ]
 [; ;test.c: 47: }
 "47
-[e :UE 857 ]
+[e :UE 856 ]
 }
 "49
 [v _writeLCD `(v ~T0 @X0 1 ef1`uc ]
@@ -7336,9 +7303,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;test.c: 51: LCD8send(0x01, 0);
 "51
 [e ( _LCD8send (2 , -> -> 1 `i `uc -> -> 0 `i `uc ]
-[; ;test.c: 52: ee_read_byte(address, data);
+[; ;test.c: 52: ee_read_char(address, data);
 "52
-[e ( _ee_read_byte (2 , _address _data ]
+[e ( _ee_read_char (2 , _address _data ]
 [; ;test.c: 54: lcdWriteLine("#");
 "54
 [e ( _lcdWriteLine (1 -> :s 2C `*uc ]
@@ -7353,7 +7320,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e ( _writeNum (1 *U _data ]
 [; ;test.c: 59: }
 "59
-[e :UE 858 ]
+[e :UE 857 ]
 }
 "61
 [v _main `(v ~T0 @X0 1 ef ]
@@ -7367,9 +7334,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;test.c: 63: KeyPadinit();
 "63
 [e ( _KeyPadinit ..  ]
-[; ;test.c: 64: XEEInit();
+[; ;test.c: 64: eepromInit();
 "64
-[e ( _XEEInit ..  ]
+[e ( _eepromInit ..  ]
 [; ;test.c: 66: delay_ms(1000);
 "66
 [e ( _delay_ms (1 -> 1000 `i ]
@@ -7397,7 +7364,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e = _prevKey -> -> 255 `i `uc ]
 [; ;test.c: 76: while (1) {
 "76
-[e :U 861 ]
+[e :U 860 ]
 {
 "77
 [v _keyNo `i ~T0 @X0 1 a ]
@@ -7409,18 +7376,18 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e = _key *U + &U _keyValues * -> -> _keyNo `ui `ux -> -> # *U &U _keyValues `ui `ux ]
 [; ;test.c: 80: if (key != prevKey) {
 "80
-[e $ ! != -> _key `i -> _prevKey `i 863  ]
+[e $ ! != -> _key `i -> _prevKey `i 862  ]
 {
 [; ;test.c: 81: PORTJ++;
 "81
 [e ++ _PORTJ -> -> 1 `i `uc ]
 [; ;test.c: 83: if (keyNo >= 0 && 10 > keyNo) {
 "83
-[e $ ! && >= _keyNo -> 0 `i > -> 10 `i _keyNo 864  ]
+[e $ ! && >= _keyNo -> 0 `i > -> 10 `i _keyNo 863  ]
 {
 [; ;test.c: 84: if (mode == READ_MODE) {
 "84
-[e $ ! == _mode -> _READ_MODE `ui 865  ]
+[e $ ! == _mode -> _READ_MODE `ui 864  ]
 {
 [; ;test.c: 85: address = address * 10 + keyNo;
 "85
@@ -7428,131 +7395,131 @@ Version 3.2 HI-TECH Software Intermediate Code
 "86
 }
 [; ;test.c: 86: } else {
-[e $U 866  ]
-[e :U 865 ]
+[e $U 865  ]
+[e :U 864 ]
 {
 [; ;test.c: 87: writeValue = writeValue * 10 + keyNo;
 "87
 [e = _writeValue -> + * -> _writeValue `i -> 10 `i _keyNo `uc ]
 "88
 }
-[e :U 866 ]
+[e :U 865 ]
 "90
 }
 [; ;test.c: 88: }
 [; ;test.c: 90: } else if (key == 'A') {
-[e $U 867  ]
-[e :U 864 ]
-[e $ ! == -> _key `ui -> 65 `ui 868  ]
+[e $U 866  ]
+[e :U 863 ]
+[e $ ! == -> _key `ui -> 65 `ui 867  ]
 {
 [; ;test.c: 91: if (mode == READ_MODE) { address = 0; }
 "91
-[e $ ! == _mode -> _READ_MODE `ui 869  ]
+[e $ ! == _mode -> _READ_MODE `ui 868  ]
 {
 [e = _address -> -> 0 `i `uc ]
 }
-[e :U 869 ]
+[e :U 868 ]
 [; ;test.c: 92: if (mode == WRITE_MODE) { writeValue = 0; }
 "92
-[e $ ! == _mode -> _WRITE_MODE `ui 870  ]
+[e $ ! == _mode -> _WRITE_MODE `ui 869  ]
 {
 [e = _writeValue -> -> 0 `i `uc ]
 }
-[e :U 870 ]
+[e :U 869 ]
 "94
 }
 [; ;test.c: 94: } else if (key == 'B') {
-[e $U 871  ]
-[e :U 868 ]
-[e $ ! == -> _key `ui -> 66 `ui 872  ]
+[e $U 870  ]
+[e :U 867 ]
+[e $ ! == -> _key `ui -> 66 `ui 871  ]
 {
 [; ;test.c: 95: if (mode == READ_MODE) { address++; }
 "95
-[e $ ! == _mode -> _READ_MODE `ui 873  ]
+[e $ ! == _mode -> _READ_MODE `ui 872  ]
 {
 [e ++ _address -> -> 1 `i `uc ]
 }
-[e :U 873 ]
+[e :U 872 ]
 [; ;test.c: 96: if (mode == WRITE_MODE) { writeValue++; }
 "96
-[e $ ! == _mode -> _WRITE_MODE `ui 874  ]
+[e $ ! == _mode -> _WRITE_MODE `ui 873  ]
 {
 [e ++ _writeValue -> -> 1 `i `uc ]
 }
-[e :U 874 ]
+[e :U 873 ]
 "98
 }
 [; ;test.c: 98: } else if (key == 'C') {
-[e $U 875  ]
-[e :U 872 ]
-[e $ ! == -> _key `ui -> 67 `ui 876  ]
+[e $U 874  ]
+[e :U 871 ]
+[e $ ! == -> _key `ui -> 67 `ui 875  ]
 {
 [; ;test.c: 99: if (mode == READ_MODE) { address--; }
 "99
-[e $ ! == _mode -> _READ_MODE `ui 877  ]
+[e $ ! == _mode -> _READ_MODE `ui 876  ]
 {
 [e -- _address -> -> 1 `i `uc ]
 }
-[e :U 877 ]
+[e :U 876 ]
 [; ;test.c: 100: if (mode == WRITE_MODE) { writeValue--; }
 "100
-[e $ ! == _mode -> _WRITE_MODE `ui 878  ]
+[e $ ! == _mode -> _WRITE_MODE `ui 877  ]
 {
 [e -- _writeValue -> -> 1 `i `uc ]
 }
-[e :U 878 ]
+[e :U 877 ]
 "102
 }
 [; ;test.c: 102: } else if (key == 'D') {
-[e $U 879  ]
-[e :U 876 ]
-[e $ ! == -> _key `ui -> 68 `ui 880  ]
+[e $U 878  ]
+[e :U 875 ]
+[e $ ! == -> _key `ui -> 68 `ui 879  ]
 {
 [; ;test.c: 103: if (mode == READ_MODE) { mode = WRITE_MODE; }
 "103
-[e $ ! == _mode -> _READ_MODE `ui 881  ]
+[e $ ! == _mode -> _READ_MODE `ui 880  ]
 {
 [e = _mode -> _WRITE_MODE `ui ]
 }
-[e $U 882  ]
+[e $U 881  ]
 "104
-[e :U 881 ]
+[e :U 880 ]
 [; ;test.c: 104: else if (mode == WRITE_MODE) { mode = READ_MODE; }
-[e $ ! == _mode -> _WRITE_MODE `ui 883  ]
+[e $ ! == _mode -> _WRITE_MODE `ui 882  ]
 {
 [e = _mode -> _READ_MODE `ui ]
 }
-[e :U 883 ]
-"106
 [e :U 882 ]
+"106
+[e :U 881 ]
 }
 [; ;test.c: 106: } else if (key == '*' && mode == WRITE_MODE) {
-[e $U 884  ]
-[e :U 880 ]
-[e $ ! && == -> _key `ui -> 42 `ui == _mode -> _WRITE_MODE `ui 885  ]
+[e $U 883  ]
+[e :U 879 ]
+[e $ ! && == -> _key `ui -> 42 `ui == _mode -> _WRITE_MODE `ui 884  ]
 {
-[; ;test.c: 107: eeWriteChar(address, writeValue);
+[; ;test.c: 107: ee_write_char(address, writeValue);
 "107
-[e ( _eeWriteChar (2 , _address _writeValue ]
+[e ( _ee_write_char (2 , _address _writeValue ]
 "108
 }
-[e :U 885 ]
-"110
 [e :U 884 ]
-[e :U 879 ]
-[e :U 875 ]
-[e :U 871 ]
-[e :U 867 ]
+"110
+[e :U 883 ]
+[e :U 878 ]
+[e :U 874 ]
+[e :U 870 ]
+[e :U 866 ]
 [; ;test.c: 108: }
 [; ;test.c: 110: if (keyNo != 0xFF) {
-[e $ ! != _keyNo -> 255 `i 886  ]
+[e $ ! != _keyNo -> 255 `i 885  ]
 {
 [; ;test.c: 111: writeLCD(address);
 "111
 [e ( _writeLCD (1 _address ]
 "112
 }
-[e :U 886 ]
+[e :U 885 ]
 [; ;test.c: 112: }
 [; ;test.c: 114: LCD8send(0xC0, 0);
 "114
@@ -7577,21 +7544,21 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e = _prevKey _key ]
 "123
 }
-[e :U 863 ]
+[e :U 862 ]
 [; ;test.c: 123: }
 [; ;test.c: 125: delay_ms(100);
 "125
 [e ( _delay_ms (1 -> 100 `i ]
 "126
 }
-[e :U 860 ]
+[e :U 859 ]
 "76
-[e $U 861  ]
-[e :U 862 ]
+[e $U 860  ]
+[e :U 861 ]
 [; ;test.c: 126: }
 [; ;test.c: 131: }
 "131
-[e :UE 859 ]
+[e :UE 858 ]
 }
 [p f _sprintf 8388736 ]
 [a 1C 37 105 0 ]

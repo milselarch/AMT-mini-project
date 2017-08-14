@@ -1,19 +1,6 @@
 // This is a guard condition so that contents of this file are not included
 // more than once.  
-/*
- * do low level SPI communication with EEPROM chip
- * to do writing and reading
- */
 
-
-/*
-  EEPROM_SPICON1 = SSPCON1
- */
-
-//#define PROPER_SPICON1	(0x21)
-//#define PROPER_SPICON1	EEPROM_SPICON1		/* SSPEN bit is set, SPI in master mode, FOSC/16, IDLE state is low level */
-
-///#define EEPROM_CS_TRIS	(TRISCbits.TRISC2)
 #define EEPROM_CS_TRIS	(TRISCbits.TRISC6)
 ///#define EEPROM_CS_IO	(LATCbits.LATC2)
 #define EEPROM_CS_IO	(PORTCbits.RC6)
@@ -40,13 +27,11 @@
 
 const unsigned long EEDELAY = 30;
 
-void wait() {
-    //delay_ms(EEDELAY);
-    //while (!EEPROM_SPI_IF);
-    while(EEPROM_SPISTATbits.BF == 0);
+void eeWait() {
+    while (EEPROM_SPISTATbits.BF == 0);
 }
 
-void XEEInit(void) {
+void eepromInit(void) {
 	EEPROM_CS_IO = 1;
 	EEPROM_CS_TRIS = 0;		// Drive SPI EEPROM chip select pin
 
@@ -56,18 +41,11 @@ void XEEInit(void) {
     
     BAUDCON1 = 0x00;
     
-    /*
-    SSP1STATbits.CKE = 1;	// CKE=1, (rising edge for shift register)
-	TRISCbits.TRISC3 = 0;	// RC3 is SCK
-	TRISCbits.TRISC5 = 0;	// RC5 is SDO
-    */
-    
     SPI1init();
     SPI1out(0x00); 
 }
 
-
-unsigned char XEERead(
+unsigned char eepromRead(
     unsigned char address
 ) {
     EEPROM_CS_IO = 0;
@@ -77,7 +55,7 @@ unsigned char XEERead(
     SPI1out(address&0xFF);
             
     EEPROM_SSPBUF = 0x00;
-    wait();
+    eeWait();
     
     unsigned char buffer = EEPROM_SSPBUF;
             
@@ -85,11 +63,10 @@ unsigned char XEERead(
     return buffer;
 }
 
-static void eeWriteChar(unsigned char address, unsigned char value) {
+static void eepromWrite(unsigned char address, unsigned char value) {
 	// Save SPI state (clock speed)
 	//SPICON1Save = EEPROM_SPICON1;
 	//EEPROM_SPICON1 = PROPER_SPICON1;
-    //http://ww1.microchip.com/downloads/en/DeviceDoc/20005715A.pdf
     
 	unsigned char sr = 0x00;
     
@@ -105,14 +82,13 @@ static void eeWriteChar(unsigned char address, unsigned char value) {
         // data flow is data to EEPROM
         EEPROM_CS_IO = 0;
         SPI1out(WREN);
-        delay_ms(30);
         SPI1out(RDSR);
         
         // data flow is data from EEPROM
         EEPROM_CS_IO = 1;
         EEPROM_SSPBUF = 0x00;
         // wait for EEPROM status data to be loaded to SSPBUF
-        wait();
+        eeWait();
         
         // READ status value sent by EEPROM
         sr = EEPROM_SSPBUF;
@@ -128,6 +104,5 @@ static void eeWriteChar(unsigned char address, unsigned char value) {
     SPI1out(address&0xFF);
     SPI1out(value);
     
-    delay_ms(100);
     EEPROM_CS_IO = 1;
 }

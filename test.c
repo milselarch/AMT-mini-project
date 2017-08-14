@@ -49,7 +49,7 @@ void writeNum(unsigned char number) {
 void writeLCD(unsigned char address) {
     unsigned char *data;
     LCD8send(0x01, 0);
-    ee_read_byte(address, data);
+    ee_read_char(address, data);
     
     lcdWriteLine("#");
     writeNum(address);
@@ -61,7 +61,7 @@ void writeLCD(unsigned char address) {
 void main(void) {
     LCD8init();
     KeyPadinit();
-    XEEInit();
+    eepromInit();
     
     delay_ms(1000);
     
@@ -104,7 +104,7 @@ void main(void) {
                 else if (mode == WRITE_MODE) { mode = READ_MODE; }
             
             } else if (key == '*' && mode == WRITE_MODE) {
-                eeWriteChar(address, writeValue);
+                ee_write_char(address, writeValue);
             } 
             
             if (keyNo != 0xFF) {
