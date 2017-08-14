@@ -1,17 +1,22 @@
 // This is a guard condition so that contents of this file are not included
 // more than once.  
+/*
+ * do low level SPI communication with EEPROM chip
+ * to do writing and reading
+ */
+
 
 /*
   EEPROM_SPICON1 = SSPCON1
  */
 
 //#define PROPER_SPICON1	(0x21)
-#define PROPER_SPICON1	EEPROM_SPICON1		/* SSPEN bit is set, SPI in master mode, FOSC/16, IDLE state is low level */
+//#define PROPER_SPICON1	EEPROM_SPICON1		/* SSPEN bit is set, SPI in master mode, FOSC/16, IDLE state is low level */
 
 ///#define EEPROM_CS_TRIS	(TRISCbits.TRISC2)
-#define EEPROM_CS_TRIS	(TRISDbits.TRISD7)
+#define EEPROM_CS_TRIS	(TRISCbits.TRISC6)
 ///#define EEPROM_CS_IO	(LATCbits.LATC2)
-#define EEPROM_CS_IO	(PORTDbits.RD7)
+#define EEPROM_CS_IO	(PORTCbits.RC6)
 
 #define EEPROM_SCK_TRIS	(TRISCbits.TRISC3)
 #define EEPROM_SDI_TRIS	(TRISCbits.TRISC4)
@@ -80,76 +85,49 @@ unsigned char XEERead(
     return buffer;
 }
 
-static void eeWriteChar(unsigned char EEPROMAddress, unsigned char value) {
-    unsigned long SPICON1Save;
-    
+static void eeWriteChar(unsigned char address, unsigned char value) {
 	// Save SPI state (clock speed)
-	SPICON1Save = EEPROM_SPICON1;
-	EEPROM_SPICON1 = PROPER_SPICON1;
+	//SPICON1Save = EEPROM_SPICON1;
+	//EEPROM_SPICON1 = PROPER_SPICON1;
+    //http://ww1.microchip.com/downloads/en/DeviceDoc/20005715A.pdf
     
 	unsigned char sr = 0x00;
     
-    while(1) {
+    while (1) {
+        /*
+        * we send write enable command to SPI
+        * and get back status register value. if status
+        * is acknowledge (0x02) it means the EEPROM is ready
+        * to write.
+        */
+        
+        //get acknowledgement for write enable operation
+        // data flow is data to EEPROM
         EEPROM_CS_IO = 0;
         SPI1out(WREN);
+        delay_ms(30);
         SPI1out(RDSR);
+        
+        // data flow is data from EEPROM
         EEPROM_CS_IO = 1;
         EEPROM_SSPBUF = 0x00;
+        // wait for EEPROM status data to be loaded to SSPBUF
         wait();
         
+        // READ status value sent by EEPROM
         sr = EEPROM_SSPBUF;
+        // if status is ACK (acknowledge), break
         if (sr & 0x02 == 0x02) { break; } 
     }
 	
-    wait();
+    // tell EEPROM we're about to write data
+    
+    EEPROM_CS_IO = 0;
     SPI1out(WRITE);
-	SPI1out(((EEPROMAddress)>>8)&0xFF);
-    SPI1out(EEPROMAddress&0xFF);
-    // Send the byte to write
-    EEPROM_SSPBUF = value;
-    ///while(!EEPROM_SPI_IF);
-    wait();
+	SPI1out(((address)>>8)&0xFF);
+    SPI1out(address&0xFF);
+    SPI1out(value);
     
-    int Dummy = EEPROM_SSPBUF;
-    
-    EEPROM_SPI_IF = 0;
-	// Begin the write
-	EEPROM_CS_IO = 1;
-	// Restore SPI State
-	EEPROM_SPICON1 = SPICON1Save;
-
-	// Wait for write to complete
-	while(XEEIsBusy());
-    //delay_ms(EEDELAY*10);
-}
-
-int XEEIsBusy() {
-	unsigned char result;
-	unsigned long SPICON1Save;
-    
-	// Save SPI state (clock speed)
-	SPICON1Save = EEPROM_SPICON1;
-	EEPROM_SPICON1 = PROPER_SPICON1;
-
-	EEPROM_CS_IO = 0;
-	// Send RDSR - Read Status Register opcode
-	EEPROM_SSPBUF = RDSR;
-	wait();
-    
-    unsigned long val;
-    val = EEPROM_SSPBUF;
-	EEPROM_SPI_IF = 0;
-    
-	// Get register contents
-	EEPROM_SSPBUF = 0;
-	wait();
-            
-	val = EEPROM_SSPBUF;
-	EEPROM_SPI_IF = 0;
-	EEPROM_CS_IO = 1;
-
-	// Restore SPI State
-	EEPROM_SPICON1 = SPICON1Save;
-
-	return val & 1;
+    delay_ms(100);
+    EEPROM_CS_IO = 1;
 }

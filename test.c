@@ -10,14 +10,14 @@
 const int READ_MODE = 1;
 const int WRITE_MODE = 0;
 int counter = 0;
-int sec=0;
+int sec = 0;
 
 extern unsigned char scan_code[16];
 unsigned char keyValues[16] = "0123456789ABCD*#";
 
 void interrupt HighIsr(void) // High priority interrupt
 {
-	if(PIR3bits.TMR4IF==1)
+	if (PIR3bits.TMR4IF==1)
 	{	
 		counter++;
         if (counter>=1000)

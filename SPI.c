@@ -14,8 +14,8 @@ void SPI1init(void)
 
 void SPI1out(char Code)
 {
-	SSP1BUF = Code;			// Transmit
+	SSP1BUF = Code;             // Transmit
 	while(SSP1STATbits.BF==0);	// Wait for END (Receipt Buffer Full)
-	Code = SSP1BUF;			// Just read to clear BF
+	Code = SSP1BUF;             // Just read to clear BF
 }
 

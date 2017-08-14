@@ -83,40 +83,32 @@ Version 3.2 HI-TECH Software Intermediate Code
 [n S635 . . . . . . . . . . . . . . . . . . . . . . . . . . ]
 "12922
 [v _SSP1STATbits `VS635 ~T0 @X0 0 e@4039 ]
-"4795
-[s S231 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S231 . RD0 RD1 RD2 RD3 RD4 RD5 RD6 RD7 ]
-"4805
-[s S232 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S232 . PSP0 PSP1 PSP2 PSP3 PSP4 PSP5 PSP6 PSP7 ]
-"4815
-[s S233 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S233 . AD0 AD1 AD2 AD3 AD4 AD5 AD6 AD7 ]
-"4825
-[s S234 :5 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S234 . . SDA2 SCL2 SS2 ]
-"4831
-[s S235 :7 `uc 1 :1 `uc 1 ]
-[n S235 . . NOT_SS2 ]
-"4835
-[s S236 :4 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S236 . . SDO2 SDI2 SCK2 nSS2 ]
-"4794
-[u S230 `S231 1 `S232 1 `S233 1 `S234 1 `S235 1 `S236 1 ]
-[n S230 . . . . . . . ]
-"4843
-[v _PORTDbits `VS230 ~T0 @X0 0 e@3971 ]
-"7836
-[s S405 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S405 . TRISD0 TRISD1 TRISD2 TRISD3 TRISD4 TRISD5 TRISD6 TRISD7 ]
-"7846
-[s S406 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S406 . RD0 RD1 RD2 RD3 RD4 RD5 RD6 RD7 ]
-"7835
-[u S404 `S405 1 `S406 1 ]
-[n S404 . . . ]
-"7857
-[v _TRISDbits `VS404 ~T0 @X0 0 e@3989 ]
+"4553
+[s S223 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S223 . RC0 RC1 RC2 RC3 RC4 RC5 RC6 RC7 ]
+"4563
+[s S224 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S224 . T1OSO T1OSI CCP1 SCK SDI SDO TX RX ]
+"4573
+[s S225 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S225 . T13CKI CCP2 . SCL SDA . CK DT ]
+"4583
+[s S226 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S226 . . ECCP2 ECCP1 SCK1 SDI1 SDO1 TX1 RX1 ]
+"4593
+[s S227 :3 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S227 . . SCL1 SDA1 . CK1 DT1 ]
+"4601
+[s S228 :2 `uc 1 :1 `uc 1 ]
+[n S228 . . PA1 ]
+"4605
+[s S229 :1 `uc 1 :1 `uc 1 ]
+[n S229 . . PA2 ]
+"4552
+[u S222 `S223 1 `S224 1 `S225 1 `S226 1 `S227 1 `S228 1 `S229 1 ]
+[n S222 . . . . . . . . ]
+"4610
+[v _PORTCbits `VS222 ~T0 @X0 0 e@3970 ]
 "7615
 [s S399 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S399 . TRISC0 TRISC1 TRISC2 TRISC3 TRISC4 TRISC5 TRISC6 TRISC7 ]
@@ -136,25 +128,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _SPI1out `(v ~T0 @X0 0 ef1`uc ]
 "13754 C:\Program Files (x86)\Microchip\xc8\v1.37\include\pic18f97j60.h
 [v _SSP1BUF `Vuc ~T0 @X0 0 e@4041 ]
-"12513
-[v _SSP1CON1 `Vuc ~T0 @X0 0 e@4038 ]
-"9355
-[s S451 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S451 . TMR1IF TMR2IF CCP1IF SSP1IF TX1IF RC1IF ADIF PSPIF ]
-"9365
-[s S452 :4 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S452 . . TXIF RCIF ]
-"9370
-[s S453 :3 `uc 1 :1 `uc 1 ]
-[n S453 . . SSPIF ]
-"9354
-[u S450 `S451 1 `S452 1 `S453 1 ]
-[n S450 . . . . ]
-"9375
-[v _PIR1bits `VS450 ~T0 @X0 0 e@3998 ]
-"122 exprom.h
-[v _XEEIsBusy `(i ~T0 @X0 0 ef ]
-"13759 C:\Program Files (x86)\Microchip\xc8\v1.37\include\pic18f97j60.h
+"13759
 [v _SSPBUF `Vuc ~T0 @X0 0 e@4041 ]
 "99 EEPROM.h
 [v _ee_write_byte `(i ~T0 @X0 0 ef ]
@@ -6656,12 +6630,12 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;exprom.h: 44: void XEEInit(void) {
 [e :U _XEEInit ]
 [f ]
-[; ;exprom.h: 45: (PORTDbits.RD7) = 1;
+[; ;exprom.h: 45: (PORTCbits.RC6) = 1;
 "45
-[e = . . _PORTDbits 0 7 -> -> 1 `i `uc ]
-[; ;exprom.h: 46: (TRISDbits.TRISD7) = 0;
+[e = . . _PORTCbits 0 6 -> -> 1 `i `uc ]
+[; ;exprom.h: 46: (TRISCbits.TRISC6) = 0;
 "46
-[e = . . _TRISDbits 0 7 -> -> 0 `i `uc ]
+[e = . . _TRISCbits 0 6 -> -> 0 `i `uc ]
 [; ;exprom.h: 48: (TRISCbits.TRISC3) = 0;
 "48
 [e = . . _TRISCbits 0 3 -> -> 0 `i `uc ]
@@ -6696,9 +6670,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _address `uc ~T0 @X0 1 r1 ]
 "67
 [f ]
-[; ;exprom.h: 68: (PORTDbits.RD7) = 0;
+[; ;exprom.h: 68: (PORTCbits.RC6) = 0;
 "68
-[e = . . _PORTDbits 0 7 -> -> 0 `i `uc ]
+[e = . . _PORTCbits 0 6 -> -> 0 `i `uc ]
 [; ;exprom.h: 70: SPI1out(0x03);
 "70
 [e ( _SPI1out (1 -> -> 3 `i `uc ]
@@ -6718,9 +6692,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _buffer `uc ~T0 @X0 1 a ]
 [; ;exprom.h: 77: unsigned char buffer = (SSP1BUF);
 [e = _buffer _SSP1BUF ]
-[; ;exprom.h: 79: (PORTDbits.RD7) = 1;
+[; ;exprom.h: 79: (PORTCbits.RC6) = 1;
 "79
-[e = . . _PORTDbits 0 7 -> -> 1 `i `uc ]
+[e = . . _PORTCbits 0 6 -> -> 1 `i `uc ]
 [; ;exprom.h: 80: return buffer;
 "80
 [e ) _buffer ]
@@ -6732,166 +6706,81 @@ Version 3.2 HI-TECH Software Intermediate Code
 "83
 [v _eeWriteChar `(v ~T0 @X0 1 sf2`uc`uc ]
 {
-[; ;exprom.h: 83: static void eeWriteChar(unsigned char EEPROMAddress, unsigned char value) {
+[; ;exprom.h: 83: static void eeWriteChar(unsigned char address, unsigned char value) {
 [e :U _eeWriteChar ]
-[v _EEPROMAddress `uc ~T0 @X0 1 r1 ]
+[v _address `uc ~T0 @X0 1 r1 ]
 [v _value `uc ~T0 @X0 1 r2 ]
 [f ]
-"84
-[v _SPICON1Save `ul ~T0 @X0 1 a ]
-[; ;exprom.h: 84: unsigned long SPICON1Save;
-[; ;exprom.h: 87: SPICON1Save = (SSP1CON1);
-"87
-[e = _SPICON1Save -> _SSP1CON1 `ul ]
-[; ;exprom.h: 88: (SSP1CON1) = (SSP1CON1);
-"88
-[e = _SSP1CON1 _SSP1CON1 ]
-"90
+"89
 [v _sr `uc ~T0 @X0 1 a ]
-[; ;exprom.h: 90: unsigned char sr = 0x00;
+[; ;exprom.h: 89: unsigned char sr = 0x00;
 [e = _sr -> -> 0 `i `uc ]
-[; ;exprom.h: 92: while(1) {
-"92
+[; ;exprom.h: 91: while (1) {
+"91
 [e :U 795 ]
 {
-[; ;exprom.h: 93: (PORTDbits.RD7) = 0;
-"93
-[e = . . _PORTDbits 0 7 -> -> 0 `i `uc ]
-[; ;exprom.h: 94: SPI1out(0x06);
-"94
-[e ( _SPI1out (1 -> -> 6 `i `uc ]
-[; ;exprom.h: 95: SPI1out(0x05);
-"95
-[e ( _SPI1out (1 -> -> 5 `i `uc ]
-[; ;exprom.h: 96: (PORTDbits.RD7) = 1;
-"96
-[e = . . _PORTDbits 0 7 -> -> 1 `i `uc ]
-[; ;exprom.h: 97: (SSP1BUF) = 0x00;
-"97
-[e = _SSP1BUF -> -> 0 `i `uc ]
-[; ;exprom.h: 98: wait();
-"98
-[e ( _wait ..  ]
-[; ;exprom.h: 100: sr = (SSP1BUF);
-"100
-[e = _sr _SSP1BUF ]
-[; ;exprom.h: 101: if (sr & 0x02 == 0x02) { break; }
+[; ;exprom.h: 101: (PORTCbits.RC6) = 0;
 "101
+[e = . . _PORTCbits 0 6 -> -> 0 `i `uc ]
+[; ;exprom.h: 102: SPI1out(0x06);
+"102
+[e ( _SPI1out (1 -> -> 6 `i `uc ]
+[; ;exprom.h: 103: delay_ms(30);
+"103
+[e ( _delay_ms (1 -> 30 `i ]
+[; ;exprom.h: 104: SPI1out(0x05);
+"104
+[e ( _SPI1out (1 -> -> 5 `i `uc ]
+[; ;exprom.h: 107: (PORTCbits.RC6) = 1;
+"107
+[e = . . _PORTCbits 0 6 -> -> 1 `i `uc ]
+[; ;exprom.h: 108: (SSP1BUF) = 0x00;
+"108
+[e = _SSP1BUF -> -> 0 `i `uc ]
+[; ;exprom.h: 110: wait();
+"110
+[e ( _wait ..  ]
+[; ;exprom.h: 113: sr = (SSP1BUF);
+"113
+[e = _sr _SSP1BUF ]
+[; ;exprom.h: 115: if (sr & 0x02 == 0x02) { break; }
+"115
 [e $ ! != & -> _sr `i -> == -> 2 `i -> 2 `i `i -> 0 `i 797  ]
 {
 [e $U 796  ]
 }
 [e :U 797 ]
-"102
+"116
 }
 [e :U 794 ]
-"92
+"91
 [e $U 795  ]
 [e :U 796 ]
-[; ;exprom.h: 102: }
-[; ;exprom.h: 104: wait();
-"104
-[e ( _wait ..  ]
-[; ;exprom.h: 105: SPI1out(0x02);
-"105
+[; ;exprom.h: 116: }
+[; ;exprom.h: 120: (PORTCbits.RC6) = 0;
+"120
+[e = . . _PORTCbits 0 6 -> -> 0 `i `uc ]
+[; ;exprom.h: 121: SPI1out(0x02);
+"121
 [e ( _SPI1out (1 -> -> 2 `i `uc ]
-[; ;exprom.h: 106: SPI1out(((EEPROMAddress)>>8)&0xFF);
-"106
-[e ( _SPI1out (1 -> & >> -> _EEPROMAddress `i -> 8 `i -> 255 `i `uc ]
-[; ;exprom.h: 107: SPI1out(EEPROMAddress&0xFF);
-"107
-[e ( _SPI1out (1 -> & -> _EEPROMAddress `i -> 255 `i `uc ]
-[; ;exprom.h: 109: (SSP1BUF) = value;
-"109
-[e = _SSP1BUF _value ]
-[; ;exprom.h: 111: wait();
-"111
-[e ( _wait ..  ]
-"113
-[v _Dummy `i ~T0 @X0 1 a ]
-[; ;exprom.h: 113: int Dummy = (SSP1BUF);
-[e = _Dummy -> _SSP1BUF `i ]
-[; ;exprom.h: 115: (PIR1bits.SSPIF) = 0;
-"115
-[e = . . _PIR1bits 2 1 -> -> 0 `i `uc ]
-[; ;exprom.h: 117: (PORTDbits.RD7) = 1;
-"117
-[e = . . _PORTDbits 0 7 -> -> 1 `i `uc ]
-[; ;exprom.h: 119: (SSP1CON1) = SPICON1Save;
-"119
-[e = _SSP1CON1 -> _SPICON1Save `uc ]
-[; ;exprom.h: 122: while(XEEIsBusy());
+[; ;exprom.h: 122: SPI1out(((address)>>8)&0xFF);
 "122
-[e $U 798  ]
-[e :U 799 ]
-[e :U 798 ]
-[e $ != ( _XEEIsBusy ..  -> 0 `i 799  ]
-[e :U 800 ]
-[; ;exprom.h: 124: }
+[e ( _SPI1out (1 -> & >> -> _address `i -> 8 `i -> 255 `i `uc ]
+[; ;exprom.h: 123: SPI1out(address&0xFF);
+"123
+[e ( _SPI1out (1 -> & -> _address `i -> 255 `i `uc ]
+[; ;exprom.h: 124: SPI1out(value);
 "124
-[e :UE 793 ]
-}
+[e ( _SPI1out (1 _value ]
+[; ;exprom.h: 126: delay_ms(100);
 "126
-[v _XEEIsBusy `(i ~T0 @X0 1 ef ]
-{
-[; ;exprom.h: 126: int XEEIsBusy() {
-[e :U _XEEIsBusy ]
-[f ]
+[e ( _delay_ms (1 -> 100 `i ]
+[; ;exprom.h: 127: (PORTCbits.RC6) = 1;
 "127
-[v _result `uc ~T0 @X0 1 a ]
+[e = . . _PORTCbits 0 6 -> -> 1 `i `uc ]
+[; ;exprom.h: 128: }
 "128
-[v _SPICON1Save `ul ~T0 @X0 1 a ]
-[; ;exprom.h: 127: unsigned char result;
-[; ;exprom.h: 128: unsigned long SPICON1Save;
-[; ;exprom.h: 131: SPICON1Save = (SSP1CON1);
-"131
-[e = _SPICON1Save -> _SSP1CON1 `ul ]
-[; ;exprom.h: 132: (SSP1CON1) = (SSP1CON1);
-"132
-[e = _SSP1CON1 _SSP1CON1 ]
-[; ;exprom.h: 134: (PORTDbits.RD7) = 0;
-"134
-[e = . . _PORTDbits 0 7 -> -> 0 `i `uc ]
-[; ;exprom.h: 136: (SSP1BUF) = 0x05;
-"136
-[e = _SSP1BUF -> -> 5 `i `uc ]
-[; ;exprom.h: 137: wait();
-"137
-[e ( _wait ..  ]
-"139
-[v _val `ul ~T0 @X0 1 a ]
-[; ;exprom.h: 139: unsigned long val;
-[; ;exprom.h: 140: val = (SSP1BUF);
-"140
-[e = _val -> _SSP1BUF `ul ]
-[; ;exprom.h: 141: (PIR1bits.SSPIF) = 0;
-"141
-[e = . . _PIR1bits 2 1 -> -> 0 `i `uc ]
-[; ;exprom.h: 144: (SSP1BUF) = 0;
-"144
-[e = _SSP1BUF -> -> 0 `i `uc ]
-[; ;exprom.h: 145: wait();
-"145
-[e ( _wait ..  ]
-[; ;exprom.h: 147: val = (SSP1BUF);
-"147
-[e = _val -> _SSP1BUF `ul ]
-[; ;exprom.h: 148: (PIR1bits.SSPIF) = 0;
-"148
-[e = . . _PIR1bits 2 1 -> -> 0 `i `uc ]
-[; ;exprom.h: 149: (PORTDbits.RD7) = 1;
-"149
-[e = . . _PORTDbits 0 7 -> -> 1 `i `uc ]
-[; ;exprom.h: 152: (SSP1CON1) = SPICON1Save;
-"152
-[e = _SSP1CON1 -> _SPICON1Save `uc ]
-[; ;exprom.h: 154: return val & 1;
-"154
-[e ) -> & _val -> -> -> 1 `i `l `ul `i ]
-[e $UE 801  ]
-[; ;exprom.h: 155: }
-"155
-[e :UE 801 ]
+[e :UE 793 ]
 }
 "12 EEPROM.h
 [v _testConfig `(v ~T0 @X0 1 ef ]
@@ -6904,7 +6793,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e = _SSPBUF -> -> 2 `i `uc ]
 [; ;EEPROM.h: 14: }
 "14
-[e :UE 802 ]
+[e :UE 798 ]
 }
 "16
 [v _cmpEEPROM `(uc ~T0 @X0 1 ef2`*uc`*uc ]
@@ -6919,7 +6808,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 {
 [v _i `ui ~T0 @X0 1 a ]
 [e = _i -> -> 0 `i `ui ]
-[e :U 804 ]
+[e :U 800 ]
 {
 "18
 [v _inputChar `uc ~T0 @X0 1 a ]
@@ -6931,87 +6820,87 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e = _checkChar *U + _check * -> _i `ux -> -> # *U _check `ui `ux ]
 [; ;EEPROM.h: 20: if (inputChar == 0xff) {inputChar = 0; }
 "20
-[e $ ! == -> _inputChar `i -> 255 `i 807  ]
+[e $ ! == -> _inputChar `i -> 255 `i 803  ]
 {
 [e = _inputChar -> -> 0 `i `uc ]
 }
-[e :U 807 ]
+[e :U 803 ]
 [; ;EEPROM.h: 21: if (checkChar == 0xff) {checkChar = 0; }
 "21
-[e $ ! == -> _checkChar `i -> 255 `i 808  ]
+[e $ ! == -> _checkChar `i -> 255 `i 804  ]
 {
 [e = _checkChar -> -> 0 `i `uc ]
 }
-[e :U 808 ]
+[e :U 804 ]
 [; ;EEPROM.h: 23: if (inputChar == '\0' && checkChar == '\0') { break; }
 "23
-[e $ ! && == -> _inputChar `ui -> 0 `ui == -> _checkChar `ui -> 0 `ui 809  ]
+[e $ ! && == -> _inputChar `ui -> 0 `ui == -> _checkChar `ui -> 0 `ui 805  ]
 {
-[e $U 805  ]
+[e $U 801  ]
+}
+[e $U 806  ]
+"24
+[e :U 805 ]
+[; ;EEPROM.h: 24: else if (inputChar == '\0' && checkChar != '\0') { return 1; }
+[e $ ! && == -> _inputChar `ui -> 0 `ui != -> _checkChar `ui -> 0 `ui 807  ]
+{
+[e ) -> -> 1 `i `uc ]
+[e $UE 799  ]
+}
+[e $U 808  ]
+"25
+[e :U 807 ]
+[; ;EEPROM.h: 25: else if (inputChar != '\0' && checkChar == '\0') { return -1; }
+[e $ ! && != -> _inputChar `ui -> 0 `ui == -> _checkChar `ui -> 0 `ui 809  ]
+{
+[e ) -> -U -> 1 `i `uc ]
+[e $UE 799  ]
 }
 [e $U 810  ]
-"24
+"26
 [e :U 809 ]
-[; ;EEPROM.h: 24: else if (inputChar == '\0' && checkChar != '\0') { return 1; }
-[e $ ! && == -> _inputChar `ui -> 0 `ui != -> _checkChar `ui -> 0 `ui 811  ]
+[; ;EEPROM.h: 26: else if (inputChar > checkChar) { return 1; }
+[e $ ! > -> _inputChar `i -> _checkChar `i 811  ]
 {
 [e ) -> -> 1 `i `uc ]
-[e $UE 803  ]
+[e $UE 799  ]
 }
 [e $U 812  ]
-"25
+"27
 [e :U 811 ]
-[; ;EEPROM.h: 25: else if (inputChar != '\0' && checkChar == '\0') { return -1; }
-[e $ ! && != -> _inputChar `ui -> 0 `ui == -> _checkChar `ui -> 0 `ui 813  ]
+[; ;EEPROM.h: 27: else if (inputChar < checkChar) { return -1; }
+[e $ ! < -> _inputChar `i -> _checkChar `i 813  ]
 {
 [e ) -> -U -> 1 `i `uc ]
-[e $UE 803  ]
+[e $UE 799  ]
 }
 [e $U 814  ]
-"26
-[e :U 813 ]
-[; ;EEPROM.h: 26: else if (inputChar > checkChar) { return 1; }
-[e $ ! > -> _inputChar `i -> _checkChar `i 815  ]
-{
-[e ) -> -> 1 `i `uc ]
-[e $UE 803  ]
-}
-[e $U 816  ]
-"27
-[e :U 815 ]
-[; ;EEPROM.h: 27: else if (inputChar < checkChar) { return -1; }
-[e $ ! < -> _inputChar `i -> _checkChar `i 817  ]
-{
-[e ) -> -U -> 1 `i `uc ]
-[e $UE 803  ]
-}
-[e $U 818  ]
 "28
-[e :U 817 ]
+[e :U 813 ]
 [; ;EEPROM.h: 28: else {}
 {
 }
-[e :U 818 ]
-[e :U 816 ]
 [e :U 814 ]
 [e :U 812 ]
 [e :U 810 ]
+[e :U 808 ]
+[e :U 806 ]
 "29
 }
 "17
 [e ++ _i -> -> 1 `i `ui ]
-[e $U 804  ]
-[e :U 805 ]
+[e $U 800  ]
+[e :U 801 ]
 "29
 }
 [; ;EEPROM.h: 29: }
 [; ;EEPROM.h: 30: return 0;
 "30
 [e ) -> -> 0 `i `uc ]
-[e $UE 803  ]
+[e $UE 799  ]
 [; ;EEPROM.h: 31: }
 "31
-[e :UE 803 ]
+[e :UE 799 ]
 }
 "33
 [v _cmpEEPROML `(uc ~T0 @X0 1 ef3`*uc`*uc`Cui ]
@@ -7027,9 +6916,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 {
 [v _i `ui ~T0 @X0 1 a ]
 [e = _i -> -> 0 `i `ui ]
-[e $ < _i _length 820  ]
-[e $U 821  ]
-[e :U 820 ]
+[e $ < _i _length 816  ]
+[e $U 817  ]
+[e :U 816 ]
 {
 "35
 [v _inputChar `uc ~T0 @X0 1 a ]
@@ -7041,87 +6930,87 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e = _checkChar *U + _check * -> _i `ux -> -> # *U _check `ui `ux ]
 [; ;EEPROM.h: 37: if (inputChar == 0xff) {inputChar = 0; }
 "37
-[e $ ! == -> _inputChar `i -> 255 `i 823  ]
+[e $ ! == -> _inputChar `i -> 255 `i 819  ]
 {
 [e = _inputChar -> -> 0 `i `uc ]
 }
-[e :U 823 ]
+[e :U 819 ]
 [; ;EEPROM.h: 38: if (checkChar == 0xff) {checkChar = 0; }
 "38
-[e $ ! == -> _checkChar `i -> 255 `i 824  ]
+[e $ ! == -> _checkChar `i -> 255 `i 820  ]
 {
 [e = _checkChar -> -> 0 `i `uc ]
 }
-[e :U 824 ]
+[e :U 820 ]
 [; ;EEPROM.h: 40: if (inputChar == '\0' && checkChar == '\0') { break; }
 "40
-[e $ ! && == -> _inputChar `ui -> 0 `ui == -> _checkChar `ui -> 0 `ui 825  ]
+[e $ ! && == -> _inputChar `ui -> 0 `ui == -> _checkChar `ui -> 0 `ui 821  ]
 {
-[e $U 821  ]
+[e $U 817  ]
+}
+[e $U 822  ]
+"41
+[e :U 821 ]
+[; ;EEPROM.h: 41: else if (inputChar == '\0' && checkChar != '\0') { return 1; }
+[e $ ! && == -> _inputChar `ui -> 0 `ui != -> _checkChar `ui -> 0 `ui 823  ]
+{
+[e ) -> -> 1 `i `uc ]
+[e $UE 815  ]
+}
+[e $U 824  ]
+"42
+[e :U 823 ]
+[; ;EEPROM.h: 42: else if (inputChar != '\0' && checkChar == '\0') { return -1; }
+[e $ ! && != -> _inputChar `ui -> 0 `ui == -> _checkChar `ui -> 0 `ui 825  ]
+{
+[e ) -> -U -> 1 `i `uc ]
+[e $UE 815  ]
 }
 [e $U 826  ]
-"41
+"43
 [e :U 825 ]
-[; ;EEPROM.h: 41: else if (inputChar == '\0' && checkChar != '\0') { return 1; }
-[e $ ! && == -> _inputChar `ui -> 0 `ui != -> _checkChar `ui -> 0 `ui 827  ]
+[; ;EEPROM.h: 43: else if (inputChar > checkChar) { return 1; }
+[e $ ! > -> _inputChar `i -> _checkChar `i 827  ]
 {
 [e ) -> -> 1 `i `uc ]
-[e $UE 819  ]
+[e $UE 815  ]
 }
 [e $U 828  ]
-"42
+"44
 [e :U 827 ]
-[; ;EEPROM.h: 42: else if (inputChar != '\0' && checkChar == '\0') { return -1; }
-[e $ ! && != -> _inputChar `ui -> 0 `ui == -> _checkChar `ui -> 0 `ui 829  ]
+[; ;EEPROM.h: 44: else if (inputChar < checkChar) { return -1; }
+[e $ ! < -> _inputChar `i -> _checkChar `i 829  ]
 {
 [e ) -> -U -> 1 `i `uc ]
-[e $UE 819  ]
+[e $UE 815  ]
 }
 [e $U 830  ]
-"43
-[e :U 829 ]
-[; ;EEPROM.h: 43: else if (inputChar > checkChar) { return 1; }
-[e $ ! > -> _inputChar `i -> _checkChar `i 831  ]
-{
-[e ) -> -> 1 `i `uc ]
-[e $UE 819  ]
-}
-[e $U 832  ]
-"44
-[e :U 831 ]
-[; ;EEPROM.h: 44: else if (inputChar < checkChar) { return -1; }
-[e $ ! < -> _inputChar `i -> _checkChar `i 833  ]
-{
-[e ) -> -U -> 1 `i `uc ]
-[e $UE 819  ]
-}
-[e $U 834  ]
 "45
-[e :U 833 ]
+[e :U 829 ]
 [; ;EEPROM.h: 45: else {}
 {
 }
-[e :U 834 ]
-[e :U 832 ]
 [e :U 830 ]
 [e :U 828 ]
 [e :U 826 ]
+[e :U 824 ]
+[e :U 822 ]
 "46
 }
 "34
 [e ++ _i -> -> 1 `i `ui ]
-[e $ < _i _length 820  ]
-[e :U 821 ]
+[e $ < _i _length 816  ]
+[e :U 817 ]
 "46
 }
 [; ;EEPROM.h: 46: }
 [; ;EEPROM.h: 47: return 0;
 "47
 [e ) -> -> 0 `i `uc ]
-[e $UE 819  ]
+[e $UE 815  ]
 [; ;EEPROM.h: 48: }
 "48
-[e :UE 819 ]
+[e :UE 815 ]
 }
 "50
 [v _ee_write `(v ~T0 @X0 1 ef2`ui`*uc ]
@@ -7136,23 +7025,23 @@ Version 3.2 HI-TECH Software Intermediate Code
 {
 [v _index `Vi ~T0 @X0 1 a ]
 [e = _index -> 0 `i ]
-[e $U 839  ]
-[e :U 836 ]
+[e $U 835  ]
+[e :U 832 ]
 {
 [; ;EEPROM.h: 52: ;
 "53
 }
 "51
 [e ++ _index -> 1 `i ]
-[e :U 839 ]
-[e $ != -> *U + __data * -> _index `x -> -> # *U __data `i `x `ui -> 0 `ui 836  ]
-[e :U 837 ]
+[e :U 835 ]
+[e $ != -> *U + __data * -> _index `x -> -> # *U __data `i `x `ui -> 0 `ui 832  ]
+[e :U 833 ]
 "53
 }
 [; ;EEPROM.h: 53: }
 [; ;EEPROM.h: 54: }
 "54
-[e :UE 835 ]
+[e :UE 831 ]
 }
 "68
 [v _ee_write_char `(v ~T0 @X0 1 ef2`uc`Cuc ]
@@ -7167,7 +7056,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e ( _eeWriteChar (2 , _address _chunk ]
 [; ;EEPROM.h: 95: }
 "95
-[e :UE 840 ]
+[e :UE 836 ]
 }
 "97
 [v _writeEEPROM `(v ~T0 @X0 1 ef1`*uc ]
@@ -7181,9 +7070,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 {
 [v _i `Vuc ~T0 @X0 1 a ]
 [e = _i -> -> 0 `i `uc ]
-[e $ < -> _i `i -> 8 `i 842  ]
-[e $U 843  ]
-[e :U 842 ]
+[e $ < -> _i `i -> 8 `i 838  ]
+[e $U 839  ]
+[e :U 838 ]
 {
 [; ;EEPROM.h: 99: ee_write_byte(i, _data+i);
 "99
@@ -7200,23 +7089,23 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e ( _delay_ms (1 -> 20 `i ]
 [; ;EEPROM.h: 104: if (_data[i] == '\0') {break;};
 "104
-[e $ ! == -> *U + __data * -> _i `ux -> -> # *U __data `ui `ux `ui -> 0 `ui 845  ]
+[e $ ! == -> *U + __data * -> _i `ux -> -> # *U __data `ui `ux `ui -> 0 `ui 841  ]
 {
-[e $U 843  ]
+[e $U 839  ]
 }
-[e :U 845 ]
+[e :U 841 ]
 "105
 }
 "98
 [e ++ _i -> -> 1 `i `uc ]
-[e $ < -> _i `i -> 8 `i 842  ]
-[e :U 843 ]
+[e $ < -> _i `i -> 8 `i 838  ]
+[e :U 839 ]
 "105
 }
 [; ;EEPROM.h: 105: }
 [; ;EEPROM.h: 106: }
 "106
-[e :UE 841 ]
+[e :UE 837 ]
 }
 "108
 [v _ee_read_byte `(v ~T0 @X0 1 ef2`uc`*uc ]
@@ -7231,7 +7120,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e = *U __data ( _XEERead (1 _address ]
 [; ;EEPROM.h: 120: }
 "120
-[e :UE 846 ]
+[e :UE 842 ]
 }
 "122
 [v _readEEPROM `(v ~T0 @X0 1 ef1`*uc ]
@@ -7245,30 +7134,30 @@ Version 3.2 HI-TECH Software Intermediate Code
 {
 [v _i `i ~T0 @X0 1 a ]
 [e = _i -> 0 `i ]
-[e :U 848 ]
+[e :U 844 ]
 {
 [; ;EEPROM.h: 124: ee_read_byte(i, _data+i);
 "124
 [e ( _ee_read_byte (2 , -> _i `uc + __data * -> _i `x -> -> # *U __data `i `x ]
 [; ;EEPROM.h: 125: if (_data[i] == '\0' || _data[i] == 0xff) {break;}
 "125
-[e $ ! || == -> *U + __data * -> _i `x -> -> # *U __data `i `x `ui -> 0 `ui == -> *U + __data * -> _i `x -> -> # *U __data `i `x `i -> 255 `i 851  ]
+[e $ ! || == -> *U + __data * -> _i `x -> -> # *U __data `i `x `ui -> 0 `ui == -> *U + __data * -> _i `x -> -> # *U __data `i `x `i -> 255 `i 847  ]
 {
-[e $U 849  ]
+[e $U 845  ]
 }
-[e :U 851 ]
+[e :U 847 ]
 "126
 }
 "123
 [e ++ _i -> 1 `i ]
-[e $U 848  ]
-[e :U 849 ]
+[e $U 844  ]
+[e :U 845 ]
 "126
 }
 [; ;EEPROM.h: 126: }
 [; ;EEPROM.h: 127: }
 "127
-[e :UE 847 ]
+[e :UE 843 ]
 }
 "6 test.c
 [p x XINST=OFF ]
@@ -7299,7 +7188,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [i _sec
 -> 0 `i
 ]
-[; ;test.c: 13: int sec=0;
+[; ;test.c: 13: int sec = 0;
 [; ;test.c: 15: extern unsigned char scan_code[16];
 "16
 [v _keyValues `uc ~T0 @X0 -> 16 `i e ]
@@ -7324,18 +7213,18 @@ Version 3.2 HI-TECH Software Intermediate Code
 ..
 ]
 [; ;test.c: 16: unsigned char keyValues[16] = "0123456789ABCD*#";
-[v F6802 `(v ~T0 @X0 1 tf ]
+[v F6796 `(v ~T0 @X0 1 tf ]
 "18
-[v _HighIsr `IF6802 ~T0 @X0 1 e ]
+[v _HighIsr `IF6796 ~T0 @X0 1 e ]
 "19
 {
 [; ;test.c: 18: void interrupt HighIsr(void)
 [; ;test.c: 19: {
 [e :U _HighIsr ]
 [f ]
-[; ;test.c: 20: if(PIR3bits.TMR4IF==1)
+[; ;test.c: 20: if (PIR3bits.TMR4IF==1)
 "20
-[e $ ! == -> . . _PIR3bits 0 3 `i -> 1 `i 853  ]
+[e $ ! == -> . . _PIR3bits 0 3 `i -> 1 `i 849  ]
 [; ;test.c: 21: {
 "21
 {
@@ -7344,7 +7233,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e ++ _counter -> 1 `i ]
 [; ;test.c: 23: if (counter>=1000)
 "23
-[e $ ! >= _counter -> 1000 `i 854  ]
+[e $ ! >= _counter -> 1000 `i 850  ]
 [; ;test.c: 24: {
 "24
 {
@@ -7356,22 +7245,22 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e = _counter -> 0 `i ]
 "27
 }
-[e :U 854 ]
+[e :U 850 ]
 [; ;test.c: 27: }
 [; ;test.c: 28: PIR3bits.TMR4IF = 0;
 "28
 [e = . . _PIR3bits 0 3 -> -> 0 `i `uc ]
 "29
 }
-[e :U 853 ]
+[e :U 849 ]
 [; ;test.c: 29: }
 [; ;test.c: 30: }
 "30
-[e :UE 852 ]
+[e :UE 848 ]
 }
-[v F6805 `(v ~T0 @X0 1 tf ]
+[v F6799 `(v ~T0 @X0 1 tf ]
 "32
-[v _LowIsr `ILF6805 ~T0 @X0 1 e ]
+[v _LowIsr `ILF6799 ~T0 @X0 1 e ]
 "33
 {
 [; ;test.c: 32: void interrupt low_priority LowIsr(void)
@@ -7380,7 +7269,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [f ]
 [; ;test.c: 35: }
 "35
-[e :UE 855 ]
+[e :UE 851 ]
 }
 "37
 [v _lcdWriteLine `(v ~T0 @X0 1 ef1`*uc ]
@@ -7394,8 +7283,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 {
 [v _i `i ~T0 @X0 1 a ]
 [e = _i -> 0 `i ]
-[e $U 860  ]
-[e :U 857 ]
+[e $U 856  ]
+[e :U 853 ]
 {
 [; ;test.c: 39: LCD8send(data[i], 1);
 "39
@@ -7404,15 +7293,15 @@ Version 3.2 HI-TECH Software Intermediate Code
 }
 "38
 [e ++ _i -> 1 `i ]
-[e :U 860 ]
-[e $ != -> *U + _data * -> _i `x -> -> # *U _data `i `x `i -> 0 `i 857  ]
-[e :U 858 ]
+[e :U 856 ]
+[e $ != -> *U + _data * -> _i `x -> -> # *U _data `i `x `i -> 0 `i 853  ]
+[e :U 854 ]
 "40
 }
 [; ;test.c: 40: }
 [; ;test.c: 41: }
 "41
-[e :UE 856 ]
+[e :UE 852 ]
 }
 "43
 [v _writeNum `(v ~T0 @X0 1 ef1`uc ]
@@ -7432,7 +7321,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e ( _lcdWriteLine (1 &U _numStr ]
 [; ;test.c: 47: }
 "47
-[e :UE 861 ]
+[e :UE 857 ]
 }
 "49
 [v _writeLCD `(v ~T0 @X0 1 ef1`uc ]
@@ -7464,7 +7353,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e ( _writeNum (1 *U _data ]
 [; ;test.c: 59: }
 "59
-[e :UE 862 ]
+[e :UE 858 ]
 }
 "61
 [v _main `(v ~T0 @X0 1 ef ]
@@ -7508,7 +7397,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e = _prevKey -> -> 255 `i `uc ]
 [; ;test.c: 76: while (1) {
 "76
-[e :U 865 ]
+[e :U 861 ]
 {
 "77
 [v _keyNo `i ~T0 @X0 1 a ]
@@ -7520,18 +7409,18 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e = _key *U + &U _keyValues * -> -> _keyNo `ui `ux -> -> # *U &U _keyValues `ui `ux ]
 [; ;test.c: 80: if (key != prevKey) {
 "80
-[e $ ! != -> _key `i -> _prevKey `i 867  ]
+[e $ ! != -> _key `i -> _prevKey `i 863  ]
 {
 [; ;test.c: 81: PORTJ++;
 "81
 [e ++ _PORTJ -> -> 1 `i `uc ]
 [; ;test.c: 83: if (keyNo >= 0 && 10 > keyNo) {
 "83
-[e $ ! && >= _keyNo -> 0 `i > -> 10 `i _keyNo 868  ]
+[e $ ! && >= _keyNo -> 0 `i > -> 10 `i _keyNo 864  ]
 {
 [; ;test.c: 84: if (mode == READ_MODE) {
 "84
-[e $ ! == _mode -> _READ_MODE `ui 869  ]
+[e $ ! == _mode -> _READ_MODE `ui 865  ]
 {
 [; ;test.c: 85: address = address * 10 + keyNo;
 "85
@@ -7539,131 +7428,131 @@ Version 3.2 HI-TECH Software Intermediate Code
 "86
 }
 [; ;test.c: 86: } else {
-[e $U 870  ]
-[e :U 869 ]
+[e $U 866  ]
+[e :U 865 ]
 {
 [; ;test.c: 87: writeValue = writeValue * 10 + keyNo;
 "87
 [e = _writeValue -> + * -> _writeValue `i -> 10 `i _keyNo `uc ]
 "88
 }
-[e :U 870 ]
+[e :U 866 ]
 "90
 }
 [; ;test.c: 88: }
 [; ;test.c: 90: } else if (key == 'A') {
-[e $U 871  ]
-[e :U 868 ]
-[e $ ! == -> _key `ui -> 65 `ui 872  ]
+[e $U 867  ]
+[e :U 864 ]
+[e $ ! == -> _key `ui -> 65 `ui 868  ]
 {
 [; ;test.c: 91: if (mode == READ_MODE) { address = 0; }
 "91
-[e $ ! == _mode -> _READ_MODE `ui 873  ]
+[e $ ! == _mode -> _READ_MODE `ui 869  ]
 {
 [e = _address -> -> 0 `i `uc ]
 }
-[e :U 873 ]
+[e :U 869 ]
 [; ;test.c: 92: if (mode == WRITE_MODE) { writeValue = 0; }
 "92
-[e $ ! == _mode -> _WRITE_MODE `ui 874  ]
+[e $ ! == _mode -> _WRITE_MODE `ui 870  ]
 {
 [e = _writeValue -> -> 0 `i `uc ]
 }
-[e :U 874 ]
+[e :U 870 ]
 "94
 }
 [; ;test.c: 94: } else if (key == 'B') {
-[e $U 875  ]
-[e :U 872 ]
-[e $ ! == -> _key `ui -> 66 `ui 876  ]
+[e $U 871  ]
+[e :U 868 ]
+[e $ ! == -> _key `ui -> 66 `ui 872  ]
 {
 [; ;test.c: 95: if (mode == READ_MODE) { address++; }
 "95
-[e $ ! == _mode -> _READ_MODE `ui 877  ]
+[e $ ! == _mode -> _READ_MODE `ui 873  ]
 {
 [e ++ _address -> -> 1 `i `uc ]
 }
-[e :U 877 ]
+[e :U 873 ]
 [; ;test.c: 96: if (mode == WRITE_MODE) { writeValue++; }
 "96
-[e $ ! == _mode -> _WRITE_MODE `ui 878  ]
+[e $ ! == _mode -> _WRITE_MODE `ui 874  ]
 {
 [e ++ _writeValue -> -> 1 `i `uc ]
 }
-[e :U 878 ]
+[e :U 874 ]
 "98
 }
 [; ;test.c: 98: } else if (key == 'C') {
-[e $U 879  ]
-[e :U 876 ]
-[e $ ! == -> _key `ui -> 67 `ui 880  ]
+[e $U 875  ]
+[e :U 872 ]
+[e $ ! == -> _key `ui -> 67 `ui 876  ]
 {
 [; ;test.c: 99: if (mode == READ_MODE) { address--; }
 "99
-[e $ ! == _mode -> _READ_MODE `ui 881  ]
+[e $ ! == _mode -> _READ_MODE `ui 877  ]
 {
 [e -- _address -> -> 1 `i `uc ]
 }
-[e :U 881 ]
+[e :U 877 ]
 [; ;test.c: 100: if (mode == WRITE_MODE) { writeValue--; }
 "100
-[e $ ! == _mode -> _WRITE_MODE `ui 882  ]
+[e $ ! == _mode -> _WRITE_MODE `ui 878  ]
 {
 [e -- _writeValue -> -> 1 `i `uc ]
 }
-[e :U 882 ]
+[e :U 878 ]
 "102
 }
 [; ;test.c: 102: } else if (key == 'D') {
-[e $U 883  ]
-[e :U 880 ]
-[e $ ! == -> _key `ui -> 68 `ui 884  ]
+[e $U 879  ]
+[e :U 876 ]
+[e $ ! == -> _key `ui -> 68 `ui 880  ]
 {
 [; ;test.c: 103: if (mode == READ_MODE) { mode = WRITE_MODE; }
 "103
-[e $ ! == _mode -> _READ_MODE `ui 885  ]
+[e $ ! == _mode -> _READ_MODE `ui 881  ]
 {
 [e = _mode -> _WRITE_MODE `ui ]
 }
-[e $U 886  ]
+[e $U 882  ]
 "104
-[e :U 885 ]
+[e :U 881 ]
 [; ;test.c: 104: else if (mode == WRITE_MODE) { mode = READ_MODE; }
-[e $ ! == _mode -> _WRITE_MODE `ui 887  ]
+[e $ ! == _mode -> _WRITE_MODE `ui 883  ]
 {
 [e = _mode -> _READ_MODE `ui ]
 }
-[e :U 887 ]
+[e :U 883 ]
 "106
-[e :U 886 ]
+[e :U 882 ]
 }
 [; ;test.c: 106: } else if (key == '*' && mode == WRITE_MODE) {
-[e $U 888  ]
-[e :U 884 ]
-[e $ ! && == -> _key `ui -> 42 `ui == _mode -> _WRITE_MODE `ui 889  ]
+[e $U 884  ]
+[e :U 880 ]
+[e $ ! && == -> _key `ui -> 42 `ui == _mode -> _WRITE_MODE `ui 885  ]
 {
 [; ;test.c: 107: eeWriteChar(address, writeValue);
 "107
 [e ( _eeWriteChar (2 , _address _writeValue ]
 "108
 }
-[e :U 889 ]
+[e :U 885 ]
 "110
-[e :U 888 ]
-[e :U 883 ]
+[e :U 884 ]
 [e :U 879 ]
 [e :U 875 ]
 [e :U 871 ]
+[e :U 867 ]
 [; ;test.c: 108: }
 [; ;test.c: 110: if (keyNo != 0xFF) {
-[e $ ! != _keyNo -> 255 `i 890  ]
+[e $ ! != _keyNo -> 255 `i 886  ]
 {
 [; ;test.c: 111: writeLCD(address);
 "111
 [e ( _writeLCD (1 _address ]
 "112
 }
-[e :U 890 ]
+[e :U 886 ]
 [; ;test.c: 112: }
 [; ;test.c: 114: LCD8send(0xC0, 0);
 "114
@@ -7688,21 +7577,21 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e = _prevKey _key ]
 "123
 }
-[e :U 867 ]
+[e :U 863 ]
 [; ;test.c: 123: }
 [; ;test.c: 125: delay_ms(100);
 "125
 [e ( _delay_ms (1 -> 100 `i ]
 "126
 }
-[e :U 864 ]
+[e :U 860 ]
 "76
-[e $U 865  ]
-[e :U 866 ]
+[e $U 861  ]
+[e :U 862 ]
 [; ;test.c: 126: }
 [; ;test.c: 131: }
 "131
-[e :UE 863 ]
+[e :UE 859 ]
 }
 [p f _sprintf 8388736 ]
 [a 1C 37 105 0 ]

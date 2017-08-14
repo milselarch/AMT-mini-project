@@ -1,3 +1,7 @@
+/*
+ * high level EEPROM read and write functions
+ */
+
 #ifndef EEPROM_H_INCLUDED
 #define EEPROM_H_INCLUDED
 
@@ -6,12 +10,6 @@
 #include <stdlib.h>
 #include "delay.h"
 #include "exprom.h"
-
-
-//needs RC6 on chips select
-void testConfig() {
-    SSPBUF = 2;
-}
 
 char cmpEEPROM(unsigned char input[], unsigned char check[]) {
     for (unsigned int i = 0;; i++) {

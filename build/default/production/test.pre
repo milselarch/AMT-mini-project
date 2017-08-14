@@ -8284,8 +8284,8 @@ while((SSP1STATbits).BF == 0);
 }
 
 void XEEInit(void) {
-(PORTDbits.RD7) = 1;
-(TRISDbits.TRISD7) = 0;
+(PORTCbits.RC6) = 1;
+(TRISCbits.TRISC6) = 0;
 
 (TRISCbits.TRISC3) = 0;
 (TRISCbits.TRISC4) = 1;
@@ -8302,7 +8302,7 @@ SPI1out(0x00);
 unsigned char XEERead(
 unsigned char address
 ) {
-(PORTDbits.RD7) = 0;
+(PORTCbits.RC6) = 0;
 
 SPI1out(0x03);
 SPI1out(((address)>>8)&0xFF);
@@ -8313,82 +8313,45 @@ wait();
 
 unsigned char buffer = (SSP1BUF);
 
-(PORTDbits.RD7) = 1;
+(PORTCbits.RC6) = 1;
 return buffer;
 }
 
-static void eeWriteChar(unsigned char EEPROMAddress, unsigned char value) {
-unsigned long SPICON1Save;
+static void eeWriteChar(unsigned char address, unsigned char value) {
 
-
-SPICON1Save = (SSP1CON1);
-(SSP1CON1) = (SSP1CON1);
-
+# 89
 unsigned char sr = 0x00;
 
-while(1) {
-(PORTDbits.RD7) = 0;
+while (1) {
+
+# 101
+(PORTCbits.RC6) = 0;
 SPI1out(0x06);
+delay_ms(30);
 SPI1out(0x05);
-(PORTDbits.RD7) = 1;
+
+
+(PORTCbits.RC6) = 1;
 (SSP1BUF) = 0x00;
+
 wait();
 
+
 sr = (SSP1BUF);
+
 if (sr & 0x02 == 0x02) { break; }
 }
 
-wait();
+
+
+(PORTCbits.RC6) = 0;
 SPI1out(0x02);
-SPI1out(((EEPROMAddress)>>8)&0xFF);
-SPI1out(EEPROMAddress&0xFF);
+SPI1out(((address)>>8)&0xFF);
+SPI1out(address&0xFF);
+SPI1out(value);
 
-(SSP1BUF) = value;
-
-wait();
-
-int Dummy = (SSP1BUF);
-
-(PIR1bits.SSPIF) = 0;
-
-(PORTDbits.RD7) = 1;
-
-(SSP1CON1) = SPICON1Save;
-
-
-while(XEEIsBusy());
-
-}
-
-int XEEIsBusy() {
-unsigned char result;
-unsigned long SPICON1Save;
-
-
-SPICON1Save = (SSP1CON1);
-(SSP1CON1) = (SSP1CON1);
-
-(PORTDbits.RD7) = 0;
-
-(SSP1BUF) = 0x05;
-wait();
-
-unsigned long val;
-val = (SSP1BUF);
-(PIR1bits.SSPIF) = 0;
-
-
-(SSP1BUF) = 0;
-wait();
-
-val = (SSP1BUF);
-(PIR1bits.SSPIF) = 0;
-(PORTDbits.RD7) = 1;
-
-
-(SSP1CON1) = SPICON1Save;
-
-return val & 1;
+delay_ms(100);
+(PORTCbits.RC6) = 1;
 }
 
 # 12 "EEPROM.h"
@@ -8479,14 +8442,14 @@ if (_data[i] == '\0' || _data[i] == 0xff) {break;}
 const int READ_MODE = 1;
 const int WRITE_MODE = 0;
 int counter = 0;
-int sec=0;
+int sec = 0;
 
 extern unsigned char scan_code[16];
 unsigned char keyValues[16] = "0123456789ABCD*#";
 
 void interrupt HighIsr(void)
 {
-if(PIR3bits.TMR4IF==1)
+if (PIR3bits.TMR4IF==1)
 {
 counter++;
 if (counter>=1000)
