@@ -11,57 +11,13 @@
 #include "delay.h"
 #include "exprom.h"
 
-char cmpEEPROM(unsigned char input[], unsigned char check[]) {
-    for (unsigned int i = 0;; i++) {
-        unsigned char inputChar = input[i];
-        unsigned char checkChar = check[i];
-        if (inputChar == 0xff) {inputChar = 0; }
-        if (checkChar == 0xff) {checkChar = 0; }
-        
-        if (inputChar == '\0' && checkChar == '\0') { break; }
-        else if (inputChar == '\0' && checkChar != '\0') { return 1; }
-        else if (inputChar != '\0' && checkChar == '\0') { return -1; }
-        else if (inputChar > checkChar) { return 1; }
-        else if (inputChar < checkChar) { return -1; }
-        else {}
-    }
-    return 0;
-}
-
-char cmpEEPROML(unsigned char input[], unsigned char check[], const unsigned int length) {
-    for (unsigned int i = 0; i<length ; i++) {
-        unsigned char inputChar = input[i];
-        unsigned char checkChar = check[i];
-        if (inputChar == 0xff) {inputChar = 0; }
-        if (checkChar == 0xff) {checkChar = 0; }
-        
-        if (inputChar == '\0' && checkChar == '\0') { break; }
-        else if (inputChar == '\0' && checkChar != '\0') { return 1; }
-        else if (inputChar != '\0' && checkChar == '\0') { return -1; }
-        else if (inputChar > checkChar) { return 1; }
-        else if (inputChar < checkChar) { return -1; }
-        else {}
-    }
-    return 0;
-}
-
-void ee_write(unsigned int address, unsigned char _data[]) {
-    for (volatile int index = 0; _data[index] != '\0'; index++) {
-        eeprom_write(address++, _data[index]); 
-    }
-}
-
 void ee_write_char(unsigned char address, const unsigned char chunk) {
     eepromWrite(address, chunk);
 }
 
-void writeEEPROM(unsigned char _data[]) {
-    for (unsigned volatile char i=0; i<8; i++) {
-        ee_write_char(i, _data+i);
-        
-        //PORTAbits.RA0 = !PORTAbits.RA0;
-        delay_ms(20);
-        if (_data[i] == '\0') {break;};
+void ee_write_string(unsigned int address, unsigned char _data[]) {
+    for (volatile int index = 0; _data[index] != '\0'; index++) {
+        ee_write_char(address++, _data[index]); 
     }
 }
 
@@ -69,11 +25,45 @@ void ee_read_char(unsigned char address, unsigned char *_data){
     *_data = eepromRead(address);
 }
 
-void readEEPROM(unsigned char _data[]) {
+void ee_read_string(unsigned char _data[]) {
     for (int i=0;; i++) {
         ee_read_char(i, _data+i);
         if (_data[i] == '\0' || _data[i] == 0xff) {break;}
     }
 }
+
+void ee_clear(unsigned long length) {
+    for (int i=0; i<length; i++) { 
+        ee_write_char(i, 0xFF);
+    }
+}
+
+void ee_write_num(unsigned char addr, volatile unsigned long number) {
+    volatile unsigned char i;
+    
+    for (i = 0; number != 0; i++) {
+        ee_write_char(addr + i, number % 10);
+        number /= 10;
+    }
+    
+    ee_write_char(addr + i, 255);
+}
+
+
+unsigned long ee_read_num(unsigned char addr) {
+    unsigned long i = 0;
+    unsigned long number = 0;
+    unsigned char byte = 0;
+    
+    do {
+        number = number * 10 + byte;
+        byte = eepromRead(addr + i);
+        i++;
+        
+    } while (byte != 0xFF);
+    
+    return number;
+}
+
 
 #endif

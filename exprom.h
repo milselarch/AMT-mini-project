@@ -1,5 +1,4 @@
-// This is a guard condition so that contents of this file are not included
-// more than once.  
+// there are two EEPROm chips. One at port C6 and one at port D7
 
 #define EEPROM_CS_TRIS	(TRISCbits.TRISC6)
 ///#define EEPROM_CS_IO	(LATCbits.LATC2)
@@ -63,10 +62,10 @@ unsigned char eepromRead(
     return buffer;
 }
 
-static void eepromWrite(unsigned char address, unsigned char value) {
+void eepromWrite(unsigned char address, unsigned char value) {
 	// Save SPI state (clock speed)
-	//SPICON1Save = EEPROM_SPICON1;
-	//EEPROM_SPICON1 = PROPER_SPICON1;
+	// SPICON1Save = EEPROM_SPICON1;
+	// EEPROM_SPICON1 = PROPER_SPICON1;
     
 	unsigned char sr = 0x00;
     
@@ -105,4 +104,5 @@ static void eepromWrite(unsigned char address, unsigned char value) {
     SPI1out(value);
     
     EEPROM_CS_IO = 1;
+    delay_ms(30);
 }

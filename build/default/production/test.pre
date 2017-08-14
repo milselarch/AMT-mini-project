@@ -8274,7 +8274,7 @@ _delay((unsigned long)((1)*(25000000/4000000.0)));
 }
 }
 
-# 28 "exprom.h"
+# 27 "exprom.h"
 const unsigned long EEDELAY = 30;
 
 void eeWait() {
@@ -8313,7 +8313,7 @@ unsigned char buffer = (SSP1BUF);
 return buffer;
 }
 
-static void eepromWrite(unsigned char address, unsigned char value) {
+void eepromWrite(unsigned char address, unsigned char value) {
 
 
 
@@ -8322,7 +8322,7 @@ unsigned char sr = 0x00;
 
 while (1) {
 
-# 83
+# 82
 (PORTCbits.RC6) = 0;
 SPI1out(0x06);
 SPI1out(0x05);
@@ -8348,60 +8348,17 @@ SPI1out(address&0xFF);
 SPI1out(value);
 
 (PORTCbits.RC6) = 1;
+delay_ms(30);
 }
 
 # 14 "EEPROM.h"
-char cmpEEPROM(unsigned char input[], unsigned char check[]) {
-for (unsigned int i = 0;; i++) {
-unsigned char inputChar = input[i];
-unsigned char checkChar = check[i];
-if (inputChar == 0xff) {inputChar = 0; }
-if (checkChar == 0xff) {checkChar = 0; }
-
-if (inputChar == '\0' && checkChar == '\0') { break; }
-else if (inputChar == '\0' && checkChar != '\0') { return 1; }
-else if (inputChar != '\0' && checkChar == '\0') { return -1; }
-else if (inputChar > checkChar) { return 1; }
-else if (inputChar < checkChar) { return -1; }
-else {}
-}
-return 0;
-}
-
-char cmpEEPROML(unsigned char input[], unsigned char check[], const unsigned int length) {
-for (unsigned int i = 0; i<length ; i++) {
-unsigned char inputChar = input[i];
-unsigned char checkChar = check[i];
-if (inputChar == 0xff) {inputChar = 0; }
-if (checkChar == 0xff) {checkChar = 0; }
-
-if (inputChar == '\0' && checkChar == '\0') { break; }
-else if (inputChar == '\0' && checkChar != '\0') { return 1; }
-else if (inputChar != '\0' && checkChar == '\0') { return -1; }
-else if (inputChar > checkChar) { return 1; }
-else if (inputChar < checkChar) { return -1; }
-else {}
-}
-return 0;
-}
-
-void ee_write(unsigned int address, unsigned char _data[]) {
-for (volatile int index = 0; _data[index] != '\0'; index++) {
-;
-}
-}
-
 void ee_write_char(unsigned char address, const unsigned char chunk) {
 eepromWrite(address, chunk);
 }
 
-void writeEEPROM(unsigned char _data[]) {
-for (unsigned volatile char i=0; i<8; i++) {
-ee_write_char(i, _data+i);
-
-
-delay_ms(20);
-if (_data[i] == '\0') {break;};
+void ee_write_string(unsigned int address, unsigned char _data[]) {
+for (volatile int index = 0; _data[index] != '\0'; index++) {
+ee_write_char(address++, _data[index]);
 }
 }
 
@@ -8409,11 +8366,44 @@ void ee_read_char(unsigned char address, unsigned char *_data){
 *_data = eepromRead(address);
 }
 
-void readEEPROM(unsigned char _data[]) {
+void ee_read_string(unsigned char _data[]) {
 for (int i=0;; i++) {
 ee_read_char(i, _data+i);
 if (_data[i] == '\0' || _data[i] == 0xff) {break;}
 }
+}
+
+void ee_clear(unsigned long length) {
+for (int i=0; i<length; i++) {
+ee_write_char(i, 0xFF);
+}
+}
+
+void ee_write_num(unsigned char addr, volatile unsigned long number) {
+volatile unsigned char i;
+
+for (i = 0; number != 0; i++) {
+ee_write_char(addr + i, number % 10);
+number /= 10;
+}
+
+ee_write_char(addr + i, 255);
+}
+
+
+unsigned long ee_read_num(unsigned char addr) {
+unsigned long i = 0;
+unsigned long number = 0;
+unsigned char byte = 0;
+
+do {
+number = number * 10 + byte;
+byte = eepromRead(addr + i);
+i++;
+
+} while (byte != 0xFF);
+
+return number;
 }
 
 
@@ -8444,8 +8434,7 @@ PIR3bits.TMR4IF = 0;
 }
 }
 
-void interrupt low_priority LowIsr(void)
-{
+void interrupt low_priority LowIsr(void) {
 
 }
 
@@ -8455,25 +8444,36 @@ LCD8send(data[i], 1);
 }
 }
 
-void writeNum(unsigned char number) {
-char numStr[10];
+void writeNum(unsigned long number) {
+char numStr[20];
 sprintf(numStr, "%i", number);
 lcdWriteLine(numStr);
 }
 
-void writeLCD(unsigned char address) {
-unsigned char *data;
+void writeLCD(unsigned char address, unsigned int valMode) {
 LCD8send(0x01, 0);
-ee_read_char(address, data);
+unsigned char *data;
 
+if (valMode == 0) {
+ee_read_char(address, data);
 lcdWriteLine("#");
 writeNum(address);
 
 lcdWriteLine(" V");
 writeNum(*data);
+
+} else if (valMode == 1) {
+unsigned long num = ee_read_num(address);
+lcdWriteLine("#");
+writeNum(address);
+
+lcdWriteLine(" N");
+writeNum(num);
+};
+
 }
 
-void main(void) {
+void main() {
 LCD8init();
 KeyPadinit();
 eepromInit();
@@ -8483,14 +8483,16 @@ delay_ms(1000);
 TRISJ = 0x00;
 PORTJ = 0b0;
 
-unsigned char address = 0;
-unsigned char writeValue = 0;
+unsigned char address = 250;
+unsigned long writeValue = 250;
 unsigned int mode = READ_MODE;
 unsigned char prevKey = 0xFF;
+unsigned int valMode;
 
 while (1) {
 int keyNo = Read_KeyPad();
 unsigned char key = keyValues[keyNo];
+valMode = 0;
 
 if (key != prevKey) {
 PORTJ++;
@@ -8518,13 +8520,23 @@ if (mode == WRITE_MODE) { writeValue--; }
 if (mode == READ_MODE) { mode = WRITE_MODE; }
 else if (mode == WRITE_MODE) { mode = READ_MODE; }
 
-} else if (key == '*' && mode == WRITE_MODE) {
-ee_write_char(address, writeValue);
+} else if (key == '#') {
+if (mode == WRITE_MODE) {
+ee_write_num(address, writeValue);
+delay_ms(100);
 }
 
-if (keyNo != 0xFF) {
-writeLCD(address);
+valMode = 1;
+
+} else if (key == '*' && mode == WRITE_MODE) {
+ee_write_char(address, writeValue++);
+delay_ms(100);
+
 }
+
+
+writeLCD(address, valMode);
+
 
 LCD8send(0xC0, 0);
 LCD8send("WR"[mode], 1);
@@ -8543,5 +8555,4 @@ delay_ms(100);
 
 
 
-}
-
+};

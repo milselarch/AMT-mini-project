@@ -29,8 +29,7 @@ void interrupt HighIsr(void) // High priority interrupt
 	}
 }
 
-void interrupt low_priority LowIsr(void) //Low priority interrupt
-{
+void interrupt low_priority LowIsr(void) {
 
 }
 
@@ -40,25 +39,36 @@ void lcdWriteLine(char * data) {
     }
 }
 
-void writeNum(unsigned char number) {
-    char numStr[10];
+void writeNum(unsigned long number) {
+    char numStr[20];
     sprintf(numStr, "%i", number);
     lcdWriteLine(numStr);
 }
 
-void writeLCD(unsigned char address) {
-    unsigned char *data;
+void writeLCD(unsigned char address, unsigned int valMode) {
     LCD8send(0x01, 0);
-    ee_read_char(address, data);
-    
-    lcdWriteLine("#");
-    writeNum(address);
+    unsigned char *data;
 
-    lcdWriteLine(" V");
-    writeNum(*data);
+    if (valMode == 0) {
+        ee_read_char(address, data);
+        lcdWriteLine("#");
+        writeNum(address);
+    
+        lcdWriteLine(" V");
+        writeNum(*data);
+    
+    } else if (valMode == 1) {
+        unsigned long num = ee_read_num(address);
+        lcdWriteLine("#");
+        writeNum(address);
+    
+        lcdWriteLine(" N");
+        writeNum(num);
+    };
+
 }
 
-void main(void) {
+void main() {
     LCD8init();
     KeyPadinit();
     eepromInit();
@@ -68,14 +78,16 @@ void main(void) {
     TRISJ = 0x00;
     PORTJ = 0b0;
     
-    unsigned char address = 0;
-    unsigned char writeValue = 0;
+    unsigned char address = 250;
+    unsigned long writeValue = 250;
     unsigned int mode = READ_MODE;
     unsigned char prevKey = 0xFF;
+    unsigned int valMode;
     
     while (1) {
         int keyNo = Read_KeyPad();
         unsigned char key = keyValues[keyNo];
+        valMode = 0;
         
         if (key != prevKey) {
             PORTJ++;
@@ -103,13 +115,23 @@ void main(void) {
                 if (mode == READ_MODE) { mode = WRITE_MODE; }
                 else if (mode == WRITE_MODE) { mode = READ_MODE; }
             
+            } else if (key == '#') {
+                if (mode == WRITE_MODE) {
+                    ee_write_num(address, writeValue);
+                    delay_ms(100);
+                }
+                
+                valMode = 1;
+                
             } else if (key == '*' && mode == WRITE_MODE) {
-                ee_write_char(address, writeValue);
-            } 
+                ee_write_char(address, writeValue++);
+                delay_ms(100);
             
-            if (keyNo != 0xFF) {
-                writeLCD(address);
             }
+            
+            //if (keyNo != 0xFF) {
+            writeLCD(address, valMode);
+            //}
             
             LCD8send(0xC0, 0);
             LCD8send("WR"[mode], 1);
@@ -128,5 +150,4 @@ void main(void) {
     //LCD8send(0x01, 0);
     //LCD8send(0x80, 0);
     //LCD8send('o', 1);
-}
-
+};
